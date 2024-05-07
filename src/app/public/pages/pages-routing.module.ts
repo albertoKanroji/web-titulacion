@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { BlogGirdComponent } from './blog-gird/blog-gird.component';
 import { TestimontalComponent } from './testimontal/testimontal.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'testimontal',
     component:TestimontalComponent
+  },
+  {
+    path: 'create-account',
+    component:CreateAccountComponent
   },
 ];
 
