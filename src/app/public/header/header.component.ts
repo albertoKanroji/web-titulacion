@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-
   selectedTheme: string | undefined;
 
-   isLoggedIn = localStorage.getItem('isLoggedIn');
+  isLoggedIn = localStorage.getItem('isLoggedIn');
   buttonText!: string;
   constructor(private router: Router) {
     // Verificar si hay un token almacenado en el localStorage
@@ -65,5 +64,4 @@ export class HeaderComponent implements OnInit {
     // Redirigir al usuario a la página de inicio de sesión
     this.router.navigate(['/login']);
   }
-
 }
