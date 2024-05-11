@@ -15,7 +15,7 @@
             <h6 class="text-light text-uppercase mb-0">{{ rutina.created_at | date:'MMM' }}</h6>
             <span>{{ rutina.created_at | date:'yyyy' }}</span>
           </div>
-          <a class="h5 text-uppercase text-light" [href]="'/ruta/a/' + rutina.id">{{ rutina.nombre }}</a>
+          <a class="h5 text-uppercase text-light" [href]="'/pages/rutinas-publicas/' + rutina.id">{{ rutina.nombre }}</a>
         </div>
       </div>
     </div>

@@ -16,4 +16,11 @@ export class MisRutinasService {
   obtenerRutinas(): Observable<Rutina[]> {
     return this.http.get<Rutina[]>(`${environment.apiUrlProd}/rutinas/`);
   }
+
+  obtenerDetalleRutina(id: number): Observable<Rutina> {
+    return this.http.get<Rutina>(`${environment.apiUrlProd}/rutinas/${id}`);
+  }
+  obtenerEjerciciosDeRutina(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrlProd}/rutinas/${id}/ejercicios`);
+  }
 }

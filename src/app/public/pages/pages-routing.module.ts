@@ -7,6 +7,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { RutinasPublicasComponent } from './rutinas/rutinas-public/rutinas-publicas/rutinas-publicas.component';
 import { RutinasUsersComponent } from './rutinas/rutinas-users/rutinas-users/rutinas-users.component';
 import { MisRutinasGuard } from 'src/guards/mis-rutinas/mis-rutinas.guard';
+import { RutinasPublicasDetalleComponent } from './rutinas/rutinas-public/rutinas-publicas-detalle/rutinas-publicas-detalle.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'rutinas-publicas',
     component:RutinasPublicasComponent
+  },
+  {
+    path: 'rutinas-publicas/:id',
+    component: RutinasPublicasDetalleComponent
   },
   {
     path: 'rutinas-users',
