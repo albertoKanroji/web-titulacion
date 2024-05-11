@@ -19,7 +19,7 @@ export class CrearCuentaService {
       password: contrasena
     };
 
-    return this.http.post<any>(`${environment.apiUrlProd}/usuarios/`, formData);
+    return this.http.post<any>(`${environment.apiUrl}/usuarios/`, formData);
   }
 
   handleCrearCuentaResponse(response: any) {
