@@ -4,6 +4,9 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { BlogGirdComponent } from './blog-gird/blog-gird.component';
 import { TestimontalComponent } from './testimontal/testimontal.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { RutinasPublicasComponent } from './rutinas/rutinas-public/rutinas-publicas/rutinas-publicas.component';
+import { RutinasUsersComponent } from './rutinas/rutinas-users/rutinas-users/rutinas-users.component';
+import { MisRutinasGuard } from 'src/guards/mis-rutinas/mis-rutinas.guard';
 
 const routes: Routes = [
   {
@@ -21,6 +24,15 @@ const routes: Routes = [
   {
     path: 'create-account',
     component:CreateAccountComponent
+  },
+  {
+    path: 'rutinas-publicas',
+    component:RutinasPublicasComponent
+  },
+  {
+    path: 'rutinas-users',
+    component:RutinasUsersComponent,
+    canActivate: [MisRutinasGuard]
   },
 ];
 
