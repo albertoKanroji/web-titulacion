@@ -14,13 +14,13 @@ export class MisRutinasService {
   constructor(private http: HttpClient) { }
 
   obtenerRutinas(): Observable<Rutina[]> {
-    return this.http.get<Rutina[]>(`${environment.apiUrlProd}/rutinas/`);
+    return this.http.get<Rutina[]>(`${environment.apiUrl}/rutinas/`);
   }
 
   obtenerDetalleRutina(id: number): Observable<Rutina> {
-    return this.http.get<Rutina>(`${environment.apiUrlProd}/rutinas/${id}`);
+    return this.http.get<Rutina>(`${environment.apiUrl}/rutinas/${id}`);
   }
   obtenerEjerciciosDeRutina(id: number): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrlProd}/rutinas/${id}/ejercicios`);
+    return this.http.get<any>(`${environment.apiUrl}/rutinas/${id}/ejercicios`);
   }
 }
