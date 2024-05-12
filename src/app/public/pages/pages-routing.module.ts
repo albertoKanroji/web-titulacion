@@ -8,6 +8,8 @@ import { RutinasPublicasComponent } from './rutinas/rutinas-public/rutinas-publi
 import { RutinasUsersComponent } from './rutinas/rutinas-users/rutinas-users/rutinas-users.component';
 import { MisRutinasGuard } from 'src/guards/mis-rutinas/mis-rutinas.guard';
 import { RutinasPublicasDetalleComponent } from './rutinas/rutinas-public/rutinas-publicas-detalle/rutinas-publicas-detalle.component';
+import { GruposMuscularesComponent } from './grupos-musculares/grupos-musculares.component';
+import { GruposMuscularesDetalleComponent } from './grupos-musculares-detalle/grupos-musculares-detalle.component';
 
 const routes: Routes = [
   {
@@ -31,8 +33,16 @@ const routes: Routes = [
     component:RutinasPublicasComponent
   },
   {
+    path: 'grupos-musculares',
+    component:GruposMuscularesComponent
+  },
+  {
     path: 'rutinas-publicas/:id',
     component: RutinasPublicasDetalleComponent
+  },
+  {
+    path: 'grupos-musculares/:id',
+    component: GruposMuscularesDetalleComponent
   },
   {
     path: 'rutinas-users',

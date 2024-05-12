@@ -102,13 +102,13 @@
                 >Ejercicios</a
               >
               <div class="dropdown-menu rounded-0 m-0">
-                <a routerLink="/pages/blog-gird" class="dropdown-item"
+                <a routerLink="/pages/rutinas-publicas" class="dropdown-item"
                   >Con Mancuerna</a
                 >
-                <a routerLink="/pages/blog-detail" class="dropdown-item"
+                <a routerLink="/pages/rutinas-publicas" class="dropdown-item"
                   >Con Barra</a
                 >
-                <a routerLink="/pages/blog-detail" class="dropdown-item"
+                <a routerLink="/pages/rutinas-publicas" class="dropdown-item"
                 >Con Maquina</a
               >
 
@@ -119,7 +119,7 @@
                 >Grupos Musculares</a
               >
               <div class="dropdown-menu rounded-0 m-0">
-                <a routerLink="/pages/blog-gird" class="dropdown-item"
+                <a routerLink="/pages/grupos-musculares" class="dropdown-item"
                   >Todo</a
                 >
                 <a routerLink="/pages/blog-detail" class="dropdown-item"
@@ -165,13 +165,11 @@
             </div>
             <a routerLink="/contact" class="nav-item nav-link">Contactanos</a>
           </div>
-          <a
-            [routerLink]="isLoggedIn === 'true' ? 'logout' : 'login'"
-            (click)="logout()"
-            class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block"
-          >
-            {{ isLoggedIn === "true" ? "Cerrar sesión" : "Iniciar sesión" }}
-          </a>
+          <div class="d-flex">
+            <a *ngIf="isLoggedIn" (click)="logout()" class="btn btn-primary mx-2">Cerrar sesión</a>
+            <a *ngIf="!isLoggedIn" [routerLink]="['/login']" class="btn btn-primary mx-2">Iniciar sesión</a>
+            <!-- Otros elementos del encabezado ... -->
+          </div>
         </div>
       </nav>
     </div>

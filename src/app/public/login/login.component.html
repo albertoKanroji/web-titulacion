@@ -31,8 +31,11 @@
                 required
               />
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
-              Iniciar sesión
+            
+
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="loading">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              <span *ngIf="!loading" (click)="login()">Iniciar Sesion</span>
             </button>
           </form>
           <p class="text-center mt-3">

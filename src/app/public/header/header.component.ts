@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/services/auth-service/auth-service.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,21 +9,12 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   selectedTheme: string | undefined;
 
-  isLoggedIn = localStorage.getItem('isLoggedIn');
+  isLoggedIn = false;
   buttonText!: string;
-  constructor(private router: Router) {
-    // Verificar si hay un token almacenado en el localStorage
-    const token = localStorage.getItem('token');
-    //const isLoggedIn = localStorage.getItem('isLoggedIn');
-
-    // Verificar si hay un token
-    if (token != null) {
-      // Si hay un token, el usuario ha iniciado sesión
-      this.isLoggedIn = 'true';
-    } else {
-      // Si no hay un token, el usuario no ha iniciado sesión
-      this.isLoggedIn = 'false';
-    }
+  constructor(private router: Router, private authService: AuthService) {
+    this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+    });
   }
   ngOnInit() {
     // Obtener el tema seleccionado del localStorage al cargar la aplicación
@@ -55,13 +47,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(): void {
-    // Limpiar datos del localStorage
-    localStorage.removeItem('isLoggedIn');
-    // Cambiar el estado de inicio de sesión a 'false'
-    this.isLoggedIn = 'false';
-    localStorage.clear();
-    this.isLoggedIn = 'false';
-    // Redirigir al usuario a la página de inicio de sesión
-    this.router.navigate(['/login']);
+    // Llamar al método logout() del servicio AuthService
+    this.authService.logout();
   }
 }
