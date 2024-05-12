@@ -20,4 +20,7 @@ export class GruposMuscularesService {
   obtenerVideosGM(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/${id}/video`);
   }
+  VideosGMDetalle(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/video/${id}`);
+  }
 }

@@ -1,0 +1,88 @@
+<!-- Hero Start -->
+<div class="container-fluid bg-primary p-5 bg-hero mb-5">
+  <div class="row py-5">
+    <div class="col-12 text-center">
+      <h1 class="display-2 text-uppercase text-white mb-md-4">
+        {{ rutina.nombre }}
+      </h1>
+    </div>
+  </div>
+</div>
+<!-- Hero End -->
+<ng-template #loaderContendio>
+  <div class="text-center" style="margin-top: 15%">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Cargando contenido...</p>
+  </div>
+</ng-template>
+<!-- Blog Start -->
+<div
+  class="container-fluid p-5"
+ 
+>
+  <div class="row g-5">
+    <div class="col-lg-12">
+      <!-- Blog Detail Start -->
+      <div class="mb-5"  *ngIf="!loadingContenido; else loaderContendio">
+        <img
+          class="img-fluid w-50 rounded mb-5"
+          [src]="rutina.miniatura"
+          alt=""
+        />
+        <h1 class="text-uppercase mb-4">
+         {{ rutina.nombre }}
+        </h1>
+        <p>
+          {{ rutina.descripcion }}
+        </p>
+        <video class="w-50 mb-5" controls>
+          <source [src]="rutina.video_url" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        
+      </div>
+      <!-- Blog Detail End -->
+
+      <!-- Tags Start -->
+      <div class="mb-5">
+        <h3 class="text-uppercase mb-4">Tag Cloud</h3>
+        <div class="d-flex flex-wrap m-n1">
+          <a href="" class="btn btn-dark m-1">Design</a>
+          <a href="" class="btn btn-dark m-1">Development</a>
+          <a href="" class="btn btn-dark m-1">Marketing</a>
+          <a href="" class="btn btn-dark m-1">SEO</a>
+          <a href="" class="btn btn-dark m-1">Writing</a>
+          <a href="" class="btn btn-dark m-1">Consulting</a>
+          <a href="" class="btn btn-dark m-1">Design</a>
+          <a href="" class="btn btn-dark m-1">Development</a>
+          <a href="" class="btn btn-dark m-1">Marketing</a>
+          <a href="" class="btn btn-dark m-1">SEO</a>
+          <a href="" class="btn btn-dark m-1">Writing</a>
+          <a href="" class="btn btn-dark m-1">Consulting</a>
+        </div>
+      </div>
+      <!-- Tags End -->
+
+      <!-- Plain Text Start -->
+      <div>
+        <h3 class="text-uppercase mb-4">Plain Text</h3>
+        <div
+          class="bg-dark rounded text-center text-light"
+          style="padding: 30px"
+        >
+          <p>
+            Vero sea et accusam justo dolor accusam lorem consetetur, dolores
+            sit amet sit dolor clita kasd justo, diam accusam no sea ut tempor
+            magna takimata, amet sit et diam dolor ipsum amet diam
+          </p>
+          <a href="" class="btn btn-primary py-2 px-4">Read More</a>
+        </div>
+      </div>
+      <!-- Plain Text End -->
+    </div>
+    <!-- Sidebar End -->
+  </div>
+</div>
+<!-- Blog End -->

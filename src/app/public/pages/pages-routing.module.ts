@@ -10,6 +10,7 @@ import { MisRutinasGuard } from 'src/guards/mis-rutinas/mis-rutinas.guard';
 import { RutinasPublicasDetalleComponent } from './rutinas/rutinas-public/rutinas-publicas-detalle/rutinas-publicas-detalle.component';
 import { GruposMuscularesComponent } from './grupos-musculares/grupos-musculares.component';
 import { GruposMuscularesDetalleComponent } from './grupos-musculares-detalle/grupos-musculares-detalle.component';
+import { VideoDetalleGMComponent } from './video-detalle-gm/video-detalle-gm.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'rutinas-publicas/:id',
     component: RutinasPublicasDetalleComponent
+  },
+  {
+    path: 'grupos-musculares/video/:id',
+    component: VideoDetalleGMComponent
   },
   {
     path: 'grupos-musculares/:id',

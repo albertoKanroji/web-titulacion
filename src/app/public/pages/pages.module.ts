@@ -8,6 +8,7 @@ import { RutinasPublicasComponent } from './rutinas/rutinas-public/rutinas-publi
 import { RutinasUsersComponent } from './rutinas/rutinas-users/rutinas-users/rutinas-users.component';
 import { RutinasPublicasDetalleComponent } from './rutinas/rutinas-public/rutinas-publicas-detalle/rutinas-publicas-detalle.component';
 import { GruposMuscularesDetalleComponent } from './grupos-musculares-detalle/grupos-musculares-detalle.component';
+import { VideoDetalleGMComponent } from './video-detalle-gm/video-detalle-gm.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { GruposMuscularesDetalleComponent } from './grupos-musculares-detalle/gr
    RutinasPublicasComponent,
    RutinasUsersComponent,
    RutinasPublicasDetalleComponent,
-   GruposMuscularesDetalleComponent
+   GruposMuscularesDetalleComponent,
+   VideoDetalleGMComponent
   ],
   imports: [
     CommonModule,
