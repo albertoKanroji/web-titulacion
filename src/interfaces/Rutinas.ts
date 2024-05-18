@@ -5,5 +5,5 @@ export interface Rutina {
     descripcion: string;
     updated_at: string;
     created_at: string;
+    tipo:string;
   }
-  

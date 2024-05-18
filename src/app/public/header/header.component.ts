@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     this.updateProfileStatusIcon();
   }
 
-  private updateProfileStatusIcon() {
+  private updateProfileStatusIcon():void {
     const profileIsComplete = localStorage.getItem('profileIsComplete') || 'no';
     this.profileStatusIcon = profileIsComplete === 'si'
       ? 'fa-check-circle' // Icono de check

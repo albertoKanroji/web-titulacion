@@ -9,7 +9,7 @@ import { Rutina } from 'src/interfaces/Rutinas';
 })
 export class MisRutinasService {
 
- 
+
 
   constructor(private http: HttpClient) { }
 
@@ -22,5 +22,8 @@ export class MisRutinasService {
   }
   obtenerEjerciciosDeRutina(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/rutinas/${id}/ejercicios`);
+  }
+  obtenerRutinasPersonalizadas(clienteId: number): Observable<Rutina[]> {
+    return this.http.get<Rutina[]>(`${environment.apiUrl}/rutinas/clientes/${clienteId}/rutinas-personalizadas`);
   }
 }
