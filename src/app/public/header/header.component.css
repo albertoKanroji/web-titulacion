@@ -1,0 +1,28 @@
+.user-image {
+  width: 40px;
+  height: 40px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-name {
+  margin-top: 8px;
+}
+.profile-status-icon {
+  bottom: 0;
+  right: -15px;
+  color: green; /* or red for exclamation */
+  font-size: 1.2em;
+}
+
+.profile-status-icon.fa-exclamation-circle {
+  color: red;
+}
+
+.profile-status-icon.fa-check-circle {
+  color: green;
+}

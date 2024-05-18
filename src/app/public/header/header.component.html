@@ -159,13 +159,22 @@
                 <a routerLink="/pages/rutinas-users" class="dropdown-item"
                   >Mis Rutinas</a
                 >
-                
+
 
               </div>
             </div>
             <a routerLink="/contact" class="nav-item nav-link">Contactanos</a>
           </div>
-          <div class="d-flex">
+          <div class="d-flex align-items-center">
+            <!-- Mostrar la imagen y el nombre del usuario solo si está logueado -->
+            <div *ngIf="isLoggedIn" class="user-info d-flex flex-column align-items-center mx-2 position-relative">
+              <a *ngIf="userImage" [routerLink]="['/pages/profile']" class="position-relative">
+                <img [src]="userImage" alt="User Image" class="user-image rounded-circle">
+                <i *ngIf="profileStatusIcon" class="fas {{ profileStatusIcon }} profile-status-icon position-absolute"></i>
+              </a>
+              <div class="user-name mt-2">{{ userName }}</div>
+            </div>
+            <!-- Botones de inicio/cierre de sesión -->
             <a *ngIf="isLoggedIn" (click)="logout()" class="btn btn-primary mx-2">Cerrar sesión</a>
             <a *ngIf="!isLoggedIn" [routerLink]="['/login']" class="btn btn-primary mx-2">Iniciar sesión</a>
             <!-- Otros elementos del encabezado ... -->

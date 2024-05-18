@@ -1,0 +1,56 @@
+
+<ng-template #loader>
+  <div class="text-center" style="margin-top: 5%;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="mt-2">Cargando datos...</p>
+  </div>
+</ng-template>
+<form [formGroup]="myForm" (ngSubmit)="submitForm()" style="margin-left: 5%;margin-top: 3%; margin-right: 5%;" class="row g-3" *ngIf="!loading; else loader">
+  <div class="col-md-6">
+    <label for="nombre" class="form-label">Nombre:</label>
+    <input type="text" formControlName="nombre" class="form-control" id="nombre">
+  </div>
+  <div class="col-md-6">
+    <label for="apellido" class="form-label">Apellido:</label>
+    <input type="text" formControlName="apellido" class="form-control" id="apellido">
+  </div>
+  <div class="col-md-6">
+    <label for="apellido2" class="form-label">Segundo Apellido:</label>
+    <input type="text" formControlName="apellido2" class="form-control" id="apellido2">
+  </div>
+  <div class="col-md-6">
+    <label for="correo" class="form-label">Correo electrónico:</label>
+    <input type="email" formControlName="correo" class="form-control" id="correo">
+  </div>
+  <div class="col-md-6">
+    <label for="rutina" class="form-label">Rutina:</label>
+    <input type="text" formControlName="rutina" class="form-control" id="rutina">
+  </div>
+  <div class="col-md-6">
+    <label for="profileIsComplete" class="form-label">Estado del perfil:</label>
+    <input type="text" formControlName="profileIsComplete" class="form-control" id="profileIsComplete">
+  </div>
+  <div class="col-md-6">
+    <label for="peso" class="form-label">Peso:</label>
+    <input type="number" formControlName="peso" class="form-control" id="peso">
+  </div>
+  <div class="col-md-6">
+    <label for="altura" class="form-label">Altura (en cm):</label>
+    <input type="number" formControlName="altura" class="form-control" id="altura">
+  </div>
+  <div class="col-md-6">
+    <label for="IMC" class="form-label">IMC:</label>
+    <input type="number" formControlName="IMC" class="form-control" id="IMC">
+  </div>
+  <!-- Agrega los otros campos del formulario aquí -->
+
+  <div class="col-12">
+
+    <button type="submit" class="btn btn-primary btn-block" [disabled]="loadingBTN">
+      <span *ngIf="loadingBTN" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      <span *ngIf="!loadingBTN" (click)="submitForm()">Guardar Datos</span>
+    </button>
+  </div>
+</form>

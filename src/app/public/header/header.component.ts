@@ -11,10 +11,39 @@ export class HeaderComponent implements OnInit {
 
   isLoggedIn = false;
   buttonText!: string;
+  userImage: string | null = null;
+  userName: string | null = null;
+  profileStatusIcon: string | null = null;
+
   constructor(private router: Router, private authService: AuthService) {
     this.authService.isLoggedIn$.subscribe((isLoggedIn) => {
       this.isLoggedIn = isLoggedIn;
+      if (this.isLoggedIn) {
+        this.updateUserData();
+      } else {
+        this.userImage = null;
+        this.userName = null;
+        this.profileStatusIcon = null;
+      }
     });
+
+    // Suscribirse a los cambios en el estado del perfil
+    this.authService.profileStatus$.subscribe(() => {
+      this.updateProfileStatusIcon();
+    });
+  }
+  private updateUserData() {
+    const userData = this.authService.getUserData();
+    this.userName = `${userData.nombre}`;
+    this.userImage = `https://ui-avatars.com/api/?name=${encodeURIComponent(this.userName)}`;
+    this.updateProfileStatusIcon();
+  }
+
+  private updateProfileStatusIcon() {
+    const profileIsComplete = localStorage.getItem('profileIsComplete') || 'no';
+    this.profileStatusIcon = profileIsComplete === 'si'
+      ? 'fa-check-circle' // Icono de check
+      : 'fa-exclamation-circle'; // Icono de admiración
   }
   ngOnInit() {
     // Obtener el tema seleccionado del localStorage al cargar la aplicación

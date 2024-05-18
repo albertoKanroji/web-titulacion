@@ -10,7 +10,8 @@ import { RutinasPublicasDetalleComponent } from './rutinas/rutinas-public/rutina
 import { GruposMuscularesDetalleComponent } from './grupos-musculares-detalle/grupos-musculares-detalle.component';
 import { VideoDetalleGMComponent } from './video-detalle-gm/video-detalle-gm.component';
 import { PreguntasRutinasTestComponent } from './rutinas/preguntas-rutinas-test/preguntas-rutinas-test.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -23,12 +24,14 @@ import {FormsModule} from "@angular/forms";
    GruposMuscularesDetalleComponent,
    VideoDetalleGMComponent,
    PreguntasRutinasTestComponent,
+   UserProfileComponent,
 
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

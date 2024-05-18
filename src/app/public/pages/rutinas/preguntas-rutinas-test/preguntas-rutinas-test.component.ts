@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {PreguntaService} from "../../../../../services/preguntas/pregunta.service";
 import { Router } from '@angular/router';
 import {AuthService} from "../../../../../services/auth-service/auth-service.service";
+import { ToastrService } from 'ngx-toastr';
+import { HttpErrorResponse } from '@angular/common/http';
+
 @Component({
   selector: 'app-preguntas-rutinas-test',
   templateUrl: './preguntas-rutinas-test.component.html',
@@ -16,7 +19,8 @@ export class PreguntasRutinasTestComponent implements OnInit {
   constructor(
     private preguntaService: PreguntaService,
     private router: Router,
-    private authService: AuthService,
+    private authService: AuthService
+    ,private toastr: ToastrService
     ) { }
 
   ngOnInit(): void {
@@ -41,22 +45,25 @@ export class PreguntasRutinasTestComponent implements OnInit {
 
   }
   enviarResultados(): void {
-    this.loadingBtn=true;
+    this.loadingBtn = true;
     const resultados = this.preguntas.map((pregunta, index) => ({
       preguntaId: pregunta.id,
       respuestaValor: this.respuestas[index]
     }));
-    console.log(resultados)
+    console.log(resultados);
 
     this.preguntaService.enviarResultados(resultados, this.userId).subscribe(
       (response) => {
-        this.loadingBtn=false;
+        this.loadingBtn = false;
         console.log('Resultados enviados exitosamente', response);
         this.router.navigate(['/pages/rutinas-users']); // Redirigir a la página de la rutina
       },
-      (error) => {
-        this.loadingBtn=false;
+      (error: HttpErrorResponse) => {
+        this.loadingBtn = false;
         console.error('Error al enviar los resultados', error);
+        if (error.error.message === 'Primero complete su perfil') {
+          this.toastr.error('Primero complete su perfil', 'Error');
+        }
       }
     );
   }

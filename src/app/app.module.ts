@@ -7,11 +7,11 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing.module';
 import { FooterComponent } from './public/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './public/login/login.component';
 import { CreateAccountComponent } from './public/pages/create-account/create-account.component';
 import  {  ToastrModule  }  from  'ngx-toastr' ;
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import  {  ToastrModule  }  from  'ngx-toastr' ;
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ReactiveFormsModule
 
   ],
   providers: [],
