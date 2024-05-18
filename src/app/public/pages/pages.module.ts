@@ -9,6 +9,8 @@ import { RutinasUsersComponent } from './rutinas/rutinas-users/rutinas-users/rut
 import { RutinasPublicasDetalleComponent } from './rutinas/rutinas-public/rutinas-publicas-detalle/rutinas-publicas-detalle.component';
 import { GruposMuscularesDetalleComponent } from './grupos-musculares-detalle/grupos-musculares-detalle.component';
 import { VideoDetalleGMComponent } from './video-detalle-gm/video-detalle-gm.component';
+import { PreguntasRutinasTestComponent } from './rutinas/preguntas-rutinas-test/preguntas-rutinas-test.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,11 +21,14 @@ import { VideoDetalleGMComponent } from './video-detalle-gm/video-detalle-gm.com
    RutinasUsersComponent,
    RutinasPublicasDetalleComponent,
    GruposMuscularesDetalleComponent,
-   VideoDetalleGMComponent
+   VideoDetalleGMComponent,
+   PreguntasRutinasTestComponent,
+
   ],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    FormsModule
   ]
 })
 export class PagesModule { }

@@ -11,6 +11,7 @@ import { RutinasPublicasDetalleComponent } from './rutinas/rutinas-public/rutina
 import { GruposMuscularesComponent } from './grupos-musculares/grupos-musculares.component';
 import { GruposMuscularesDetalleComponent } from './grupos-musculares-detalle/grupos-musculares-detalle.component';
 import { VideoDetalleGMComponent } from './video-detalle-gm/video-detalle-gm.component';
+import {PreguntasRutinasTestComponent} from "./rutinas/preguntas-rutinas-test/preguntas-rutinas-test.component";
 
 const routes: Routes = [
   {
@@ -52,6 +53,11 @@ const routes: Routes = [
   {
     path: 'rutinas-users',
     component:RutinasUsersComponent,
+    canActivate: [MisRutinasGuard]
+  },
+  {
+    path: 'preguntas-rutinas-test',
+    component:PreguntasRutinasTestComponent,
     canActivate: [MisRutinasGuard]
   },
 ];

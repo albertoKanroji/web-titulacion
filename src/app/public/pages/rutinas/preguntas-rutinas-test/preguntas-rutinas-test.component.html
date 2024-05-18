@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div *ngIf="!loading">
+    <form (ngSubmit)="enviarResultados()">
+      <div *ngFor="let pregunta of preguntas; let i = index" class="mb-4">
+        <h3>{{ pregunta.pregunta }}</h3>
+        <select class="form-select" [(ngModel)]="respuestas[i]" name="respuesta{{ i }}">
+          <option *ngFor="let opcion of pregunta.respuestas_opciones" [value]="opcion.valor">
+            {{ opcion.opcion }}
+          </option>
+        </select>
+      </div>
+
+
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="loadingBtn">
+        <span *ngIf="loadingBtn" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span *ngIf="!loadingBtn" (click)="enviarResultados()">Enviar Resultados y Obtener Rutina</span>
+      </button>
+    </form>
+  </div>
+</div>

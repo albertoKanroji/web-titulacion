@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './public/login/login.component';
 import { CreateAccountComponent } from './public/pages/create-account/create-account.component';
+import  {  ToastrModule  }  from  'ngx-toastr' ;
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CreateAccountComponent } from './public/pages/create-account/create-acc
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+
   ],
   imports: [
   BrowserModule,
@@ -27,7 +29,7 @@ import { CreateAccountComponent } from './public/pages/create-account/create-acc
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    
+    ToastrModule.forRoot(),
 
   ],
   providers: [],
