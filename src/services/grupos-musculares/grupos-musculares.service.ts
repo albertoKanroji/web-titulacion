@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class GruposMuscularesService {
 
-  
+
   constructor(private http: HttpClient) { }
 
   obtenerGruposMusculares(): Observable<any[]> {
@@ -20,7 +20,25 @@ export class GruposMuscularesService {
   obtenerVideosGM(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/${id}/video`);
   }
+  getAllVideos(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/videos/`);
+  }
   VideosGMDetalle(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/video/${id}`);
+  }
+  getTags(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/${id}/tags`);
+  }
+  getEquipo(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/${id}/equipo`);
+  }
+  getTagsVideo(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/videos/${id}/tags`);
+  }
+  getEquipoVideo(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/videos/${id}/equipo`);
+  }
+  getEjerciciosVideos(nombre: string): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/videos/equipo/${nombre}`);
   }
 }

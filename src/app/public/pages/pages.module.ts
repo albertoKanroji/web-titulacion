@@ -12,6 +12,8 @@ import { VideoDetalleGMComponent } from './video-detalle-gm/video-detalle-gm.com
 import { PreguntasRutinasTestComponent } from './rutinas/preguntas-rutinas-test/preguntas-rutinas-test.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { VideosAllComponent } from './videos-all/videos-all.component';
+import { VideosSelectComponent } from './videos-select/videos-select.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
    VideoDetalleGMComponent,
    PreguntasRutinasTestComponent,
    UserProfileComponent,
+   VideosAllComponent,
+   VideosSelectComponent,
 
   ],
   imports: [

@@ -12,52 +12,52 @@
 </div>
 <!-- Hero End -->
 <ng-template #loader1>
-    <div class="text-center" style="margin-top: 10%">
-      <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <p class="mt-2">Cargando Rutinas...</p>
+  <div class="text-center" style="margin-top: 10%">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
     </div>
-  </ng-template>
+    <p class="mt-2">Cargando Rutinas...</p>
+  </div>
+</ng-template>
 <!-- Blog Start -->
 <div class="container-fluid p-5">
-  <div class="row g-5" >
+  <div class="row g-5">
     <div class="col-lg-8">
       <!-- Blog Detail Start -->
-      <div class="mb-5 d-flex align-items-start" *ngIf="!loading1; else loader1">
-        <img class="img-fluid w-50 rounded me-4 align-self-start" [src]="rutina.imagen" alt="" />
+      <div
+        class="mb-5 d-flex align-items-start"
+        *ngIf="!loading1; else loader1"
+      >
+        <img
+          class="img-fluid w-50 rounded me-4 align-self-start"
+          [src]="rutina.imagen"
+          alt=""
+        />
         <div>
-            <h1 class="text-uppercase mb-4">{{ rutina.nombre }}</h1>
-            <p>{{ rutina.descripcion }}</p>
+          <h1 class="text-uppercase mb-4">{{ rutina.nombre }}</h1>
+          <p>{{ rutina.descripcion }}</p>
         </div>
-    </div>
-    
+      </div>
 
-      
       <!-- Blog Detail End -->
 
       <!-- Comment List Start -->
       <div class="container-fluid p-5" *ngIf="!loading2; else loader2">
-        
-        <div class="row g-5" >
+        <div class="row g-5">
           <div class="col-lg-4" *ngFor="let rutina of ejercicios">
             <div class="blog-item">
               <div class="position-relative overflow-hidden rounded-top">
                 <img class="img-fluid" [src]="rutina.miniatura" alt="" />
               </div>
               <div class="bg-dark d-flex align-items-center rounded-bottom p-3">
-                
                 <a
                   class="h5 text-uppercase text-light"
                   [href]="'/pages/grupos-musculares/video/' + rutina.id"
                   >{{ rutina.nombre }}</a
                 >
                 <!-- <a class="btn btn-light btn-sm ms-auto" [href]="'/pages/grupos-musculares/' + rutina.id" >Ver Ejercicios</a> -->
-      
               </div>
-              
             </div>
-            
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
       <!-- Comment List End -->
 
       <!-- Comment Form Start -->
-      
+
       <!-- Comment Form End -->
     </div>
 
@@ -88,147 +88,48 @@
         </div>
       </div>
       <!-- Search Form End -->
-
+      <ng-template #loader>
+        <div class="text-center" style="margin-top: 5%">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p class="mt-2">Cargando Informacion...</p>
+        </div>
+      </ng-template>
       <!-- Category Start -->
       <div class="mb-5">
-        <h3 class="text-uppercase mb-4">Categories</h3>
+        <h3 class="text-uppercase mb-4">Otros grupos musculares</h3>
         <div
           class="d-flex flex-column justify-content-start bg-dark rounded p-4"
+          *ngIf="!loading; else loader"
         >
-          <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"
-            ><i class="bi bi-arrow-right text-primary me-2"></i>Web Design</a
-          >
-          <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"
-            ><i class="bi bi-arrow-right text-primary me-2"></i>Web
-            Development</a
-          >
-          <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"
-            ><i class="bi bi-arrow-right text-primary me-2"></i>Web
-            Development</a
-          >
-          <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"
-            ><i class="bi bi-arrow-right text-primary me-2"></i>Keyword
-            Research</a
-          >
-          <a class="fs-5 fw-bold text-light text-uppercase" href="#"
-            ><i class="bi bi-arrow-right text-primary me-2"></i>Email
-            Marketing</a
+          <a
+            *ngFor="let rutina of rutinas"
+            class="fs-5 fw-bold text-light text-uppercase mb-2"
+            [href]="'/pages/grupos-musculares/' + rutina.id"
+            ><i class="bi bi-arrow-right text-primary me-2"></i
+            >{{ rutina.nombre }}</a
           >
         </div>
       </div>
-      <!-- Category End -->
-
-      <!-- Recent Post Start -->
-      <div class="mb-5">
-        <h3 class="text-uppercase mb-4">Recent Post</h3>
-        <div class="bg-dark rounded p-4">
-          <div class="d-flex overflow-hidden mb-3">
-            <img
-              class="img-fluid flex-shrink-0 rounded-start"
-              src="../../../../assets/img/blog-1.jpg"
-              style="width: 75px"
-              alt=""
-            />
-            <a
-              href=""
-              class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0"
-              >Sed amet tempor amet sit kasd sea lorem
-            </a>
-          </div>
-          <div class="d-flex overflow-hidden mb-3">
-            <img
-              class="img-fluid flex-shrink-0 rounded-start"
-              src="../../../../assets/img/blog-2.jpg"
-              style="width: 75px"
-              alt=""
-            />
-            <a
-              href=""
-              class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0"
-              >Sed amet tempor amet sit kasd sea lorem
-            </a>
-          </div>
-          <div class="d-flex overflow-hidden mb-3">
-            <img
-              class="img-fluid flex-shrink-0 rounded-start"
-              src="../../../../assets/img/blog-3.jpg"
-              style="width: 75px"
-              alt=""
-            />
-            <a
-              href=""
-              class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0"
-              >Sed amet tempor amet sit kasd sea lorem
-            </a>
-          </div>
-          <div class="d-flex overflow-hidden mb-3">
-            <img
-              class="img-fluid flex-shrink-0 rounded-start"
-              src="../../../../assets/img/blog-1.jpg"
-              style="width: 75px"
-              alt=""
-            />
-            <a
-              href=""
-              class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0"
-              >Sed amet tempor amet sit kasd sea lorem
-            </a>
-          </div>
-          <div class="d-flex overflow-hidden">
-            <img
-              class="img-fluid flex-shrink-0 rounded-start"
-              src="../../../../assets/img/blog-2.jpg"
-              style="width: 75px"
-              alt=""
-            />
-            <a
-              href=""
-              class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0"
-              >Sed amet tempor amet sit kasd sea lorem
-            </a>
-          </div>
-        </div>
-      </div>
-      <!-- Recent Post End -->
 
       <!-- Tags Start -->
       <div class="mb-5">
-        <h3 class="text-uppercase mb-4">Tag Cloud</h3>
-        <div class="d-flex flex-wrap m-n1">
-          <a href="" class="btn btn-dark m-1">Design</a>
-          <a href="" class="btn btn-dark m-1">Development</a>
-          <a href="" class="btn btn-dark m-1">Marketing</a>
-          <a href="" class="btn btn-dark m-1">SEO</a>
-          <a href="" class="btn btn-dark m-1">Writing</a>
-          <a href="" class="btn btn-dark m-1">Consulting</a>
-          <a href="" class="btn btn-dark m-1">Design</a>
-          <a href="" class="btn btn-dark m-1">Development</a>
-          <a href="" class="btn btn-dark m-1">Marketing</a>
-          <a href="" class="btn btn-dark m-1">SEO</a>
-          <a href="" class="btn btn-dark m-1">Writing</a>
-          <a href="" class="btn btn-dark m-1">Consulting</a>
+        <h3 class="text-uppercase mb-4">Tags</h3>
+        <div class="d-flex flex-wrap m-n1" *ngIf="!loading; else loader">
+          <a *ngFor="let tag of tags" href="" class="btn btn-dark m-1">{{
+            tag.nombre
+          }}</a>
         </div>
       </div>
-      <!-- Tags End -->
-
-      <!-- Plain Text Start -->
-      <div>
-        <h3 class="text-uppercase mb-4">Plain Text</h3>
-        <div
-          class="bg-dark rounded text-center text-light"
-          style="padding: 30px"
-        >
-          <p>
-            Vero sea et accusam justo dolor accusam lorem consetetur, dolores
-            sit amet sit dolor clita kasd justo, diam accusam no sea ut tempor
-            magna takimata, amet sit et diam dolor ipsum amet diam
-          </p>
-          <a href="" class="btn btn-primary py-2 px-4">Read More</a>
+      <div class="mb-5">
+        <h3 class="text-uppercase mb-4">Equipo</h3>
+        <div class="d-flex flex-wrap m-n1" *ngIf="!loading; else loader">
+          <a *ngFor="let eq of equipo" href="" class="btn btn-dark m-1">{{
+            eq.nombre
+          }}</a>
         </div>
       </div>
-      <!-- Plain Text End -->
     </div>
-    <!-- Sidebar End -->
   </div>
 </div>
-<!-- Blog End -->
