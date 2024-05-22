@@ -25,6 +25,7 @@ export class RutinasPublicasDetalleComponent implements OnInit {
     this.rutinasService.obtenerDetalleRutina(id).subscribe(
       (data: any) => {
         this.rutina = data.data;
+        console.log(this.rutina)
       },
       (error) => {
         console.error('Error al obtener el detalle de la rutina:', error);
@@ -32,16 +33,17 @@ export class RutinasPublicasDetalleComponent implements OnInit {
     );
   }
   obtenerEjerciciosDeRutina(): void {
-    this.loading = true; 
+    this.loading = true;
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.rutinasService.obtenerEjerciciosDeRutina(id).subscribe(
       (data: any) => {
         this.ejercicios = data.data;
-        this.loading = false; 
+        this.loading = false;
+        console.log(this.ejercicios)
       },
       (error) => {
         console.error('Error al obtener los ejercicios de la rutina:', error);
-        this.loading = false; 
+        this.loading = false;
       }
     );
   }

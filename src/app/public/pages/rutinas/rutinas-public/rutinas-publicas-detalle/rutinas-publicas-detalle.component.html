@@ -25,40 +25,39 @@
   <div class="row g-5">
     <!-- Blog list Start -->
     <div class="col-lg-8">
-        <div class="row g-5" *ngIf="!loading; else loader">
-          <ng-container *ngIf="ejercicios.length > 0; else noEjercicios">
-            <div class="col-md-6" *ngFor="let ejercicio of ejercicios">
-              <div class="blog-item">
-                <div class="position-relative overflow-hidden rounded-top">
-                  <img class="img-fluid" [src]="ejercicio.imagen" alt="" />
+      <div class="row g-5" *ngIf="!loading; else loader">
+        <ng-container *ngIf="ejercicios.length > 0; else noEjercicios">
+          <div class="col-md-6" *ngFor="let ejercicio of ejercicios">
+            <div class="blog-item">
+              <div class="position-relative overflow-hidden rounded-top">
+                <img class="img-fluid" [src]="ejercicio.miniatura" alt="" />
+              </div>
+              <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
+                <div
+                  class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3"
+                >
+                  <span>{{ ejercicio.created_at | date : "dd" }}</span>
+                  <h6 class="text-light text-uppercase mb-0">
+                    {{ ejercicio.created_at | date : "MMM" }}
+                  </h6>
+                  <span>{{ ejercicio.created_at | date : "yyyy" }}</span>
                 </div>
-                <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-                  <div
-                    class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3"
-                  >
-                    <span>{{ ejercicio.created_at | date : "dd" }}</span>
-                    <h6 class="text-light text-uppercase mb-0">
-                      {{ ejercicio.created_at | date : "MMM" }}
-                    </h6>
-                    <span>{{ ejercicio.created_at | date : "yyyy" }}</span>
-                  </div>
-                  <a
-                    class="h5 text-uppercase text-light"
-                    [href]="'/pages/grupos-musculares/video/' + ejercicio.id"
-                    >{{ ejercicio.nombre }}</a
-                  >
-                </div>
+                <a
+                  class="h5 text-uppercase text-light"
+                  [href]="'/pages/grupos-musculares/video/' + ejercicio.id"
+                  >{{ ejercicio.nombre }}</a
+                >
               </div>
             </div>
-          </ng-container>
-          <ng-template #noEjercicios>
-            <div class="col-md-12 text-center">
-              <p class="text-secondary">Sin rutinas por el momento.</p>
-            </div>
-          </ng-template>
-        </div>
+          </div>
+        </ng-container>
+        <ng-template #noEjercicios>
+          <div class="col-md-12 text-center">
+            <p class="text-secondary">Sin rutinas por el momento.</p>
+          </div>
+        </ng-template>
       </div>
-      
+    </div>
 
     <!-- Blog list End -->
 

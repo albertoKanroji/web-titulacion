@@ -65,7 +65,7 @@ const routes: Routes = [
   {
     path: 'videos-all',
     component:VideosAllComponent,
-    canActivate: [MisRutinasGuard]
+
   },
   {
     path: 'preguntas-rutinas-test',
