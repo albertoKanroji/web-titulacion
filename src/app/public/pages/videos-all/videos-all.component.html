@@ -20,7 +20,22 @@
   </div>
 </ng-template>
 <!-- Blog Start -->
+
 <div class="container-fluid p-5">
+  <div class="mt-1">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control p-3"
+        placeholder="Buscar videos por nombre"
+        [(ngModel)]="searchText"
+        (input)="filterVideos()"
+      />
+      <button class="btn btn-primary px-4">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
   <div class="row g-5">
     <div class="col-lg-12">
       <!-- Blog Detail Start -->
@@ -30,7 +45,7 @@
       <!-- Comment List Start -->
       <div class="container-fluid p-5" *ngIf="!loading2; else loader">
         <div class="row g-5">
-          <div class="col-lg-4" *ngFor="let rutina of ejercicios">
+          <div class="col-lg-4" *ngFor="let rutina of filteredVideos">
             <div class="blog-item">
               <div class="position-relative overflow-hidden rounded-top">
                 <img class="img-fluid" [src]="rutina.miniatura" alt="" />

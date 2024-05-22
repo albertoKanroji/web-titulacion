@@ -17,8 +17,18 @@ export class VideosAllComponent implements OnInit {
   tags: any[]  = [];
   equipo: any[]  = [];
   loader2: boolean = false;
+  filteredVideos: any[] = []; // Array para almacenar los videos filtrados
+  searchText: string = '';
   constructor(private route: ActivatedRoute, private rutinasService: GruposMuscularesService) { }
-
+  filterVideos(): void {
+    if (this.searchText.trim() === '') {
+      this.filteredVideos = this.ejercicios;
+    } else {
+      this.filteredVideos = this.ejercicios.filter((rutina) =>
+        rutina.nombre.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+  }
   ngOnInit(): void {
     this.getVideosAll()
   }
@@ -27,7 +37,7 @@ export class VideosAllComponent implements OnInit {
     this.rutinasService.getAllVideos().subscribe(
       (data: any) => {
         this.ejercicios = data.data; // Asegúrate de que data sea un array de rutinas
-        console.log(data)
+        this.filteredVideos = this.ejercicios;
         this.loader2 = false;
       },
       (error) => {

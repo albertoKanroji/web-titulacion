@@ -1,4 +1,4 @@
-<div class="container-fluid p-5" >
+<div class="container-fluid p-5">
   <div class="mb-5 text-center">
     <h5 class="text-primary text-uppercase">Todo sobre Ejercicios</h5>
     <h1 class="display-3 text-uppercase mb-0">¿Qué quieres entrenar hoy?</h1>
@@ -24,12 +24,13 @@
             [href]="'/pages/rutinas-publicas/' + rutina.id"
             >{{ rutina.nombre }}</a
           >
-          <a class="btn btn-light btn-sm ms-auto" [href]="'/pages/grupos-musculares/' + rutina.id" >Ver Ejercicios</a>
-
+          <a
+            class="btn btn-light btn-sm ms-auto"
+            [href]="'/pages/grupos-musculares/' + rutina.id"
+            >Ver Ejercicios</a
+          >
         </div>
-        
       </div>
-      
     </div>
   </div>
 </div>
