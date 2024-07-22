@@ -47,7 +47,11 @@
           <div class="col-lg-4" *ngFor="let rutina of ejercicios">
             <div class="blog-item">
               <div class="position-relative overflow-hidden rounded-top">
-                <img class="img-fluid" [src]="rutina.miniatura" alt="" />
+                <img
+                  class="img-fluid"
+                  [src]="'data:image/jpeg;base64,' + rutina.miniatura"
+                  alt=""
+                />
               </div>
               <div class="bg-dark d-flex align-items-center rounded-bottom p-3">
                 <a

@@ -14,7 +14,11 @@
     <div class="col-lg-4" *ngFor="let rutina of rutinas">
       <div class="blog-item">
         <div class="position-relative overflow-hidden rounded-top">
-          <img class="img-fluid" [src]="rutina.imagen" alt="" />
+          <img
+            class="img-fluid"
+            [src]="'data:image/jpeg;base64,' + rutina.imagen"
+            alt=""
+          />
         </div>
         <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
           <div

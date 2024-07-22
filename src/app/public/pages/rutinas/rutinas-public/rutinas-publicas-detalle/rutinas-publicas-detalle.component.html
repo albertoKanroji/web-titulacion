@@ -30,7 +30,11 @@
           <div class="col-md-6" *ngFor="let ejercicio of ejercicios">
             <div class="blog-item">
               <div class="position-relative overflow-hidden rounded-top">
-                <img class="img-fluid" [src]="ejercicio.miniatura" alt="" />
+                <img
+                  class="img-fluid"
+                  [src]="'data:image/jpeg;base64,' + ejercicio.miniatura"
+                  alt=""
+                />
               </div>
               <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
                 <div
@@ -64,14 +68,7 @@
     <!-- Sidebar Start -->
     <div class="col-lg-4">
       <!-- Search Form Start -->
-      <div class="mb-5">
-        <div class="input-group">
-          <input type="text" class="form-control p-3" placeholder="Keyword" />
-          <button class="btn btn-primary px-4">
-            <i class="bi bi-search"></i>
-          </button>
-        </div>
-      </div>
+
       <!-- Search Form End -->
 
       <!-- Category Start -->

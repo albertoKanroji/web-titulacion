@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root',
@@ -12,12 +12,17 @@ export class AuthService {
   // Subject para detectar cambios en localStorage
   private profileStatusSubject = new Subject<void>();
   profileStatus$ = this.profileStatusSubject.asObservable();
+  private INACTIVITY_TIME = 10 * 60 * 1000; // 10 minutos en milisegundos
+  private LAST_ACTIVITY_KEY = 'lastActivityTime';
+  private inactivityTimer: any;
   showSuccess() {
     this.toastr.info('Completado', 'Sesion Borrada');
   }
-  constructor(private router: Router,private toastr: ToastrService) {
+  constructor(private router: Router, private toastr: ToastrService) {
     // Comprobar si el usuario está logueado al iniciar la aplicación
     this.checkLoginStatus();
+    this.checkInactivity();
+    this.setupInactivityListeners();
   }
   updateProfileStatus(status: string) {
     localStorage.setItem('profileIsComplete', status);
@@ -34,6 +39,9 @@ export class AuthService {
   }
   setLoggedIn(value: boolean): void {
     this.isLoggedInSubject.next(value);
+    if (value) {
+      this.resetInactivityTimer();
+    }
   }
   logout(): void {
     localStorage.removeItem('token');
@@ -42,7 +50,7 @@ export class AuthService {
     localStorage.removeItem('clienteNombre');
     localStorage.removeItem('clienteApellidoPaterno');
     localStorage.removeItem('clienteId');
-    this.showSuccess()
+    this.showSuccess();
     this.router.navigate(['/']);
     this.setLoggedIn(false);
   }
@@ -65,7 +73,7 @@ export class AuthService {
     nombre: string | null;
     apellidoPaterno: string | null;
     id: number | null;
-    image: string | null ;
+    image: string | null;
     profileIsComplete: string | null;
   } {
     const email = localStorage.getItem('clienteEmail');
@@ -74,7 +82,39 @@ export class AuthService {
     const id = this.getUserId();
     const image = localStorage.getItem('image');
     const profileIsComplete = localStorage.getItem('profileIsComplete');
-    return { email, nombre, apellidoPaterno, id, image ,profileIsComplete};
+    return { email, nombre, apellidoPaterno, id, image, profileIsComplete };
+  }
+  private setupInactivityListeners() {
+    this.resetInactivityTimer();
+    window.addEventListener('mousemove', () => this.resetInactivityTimer());
+    window.addEventListener('keydown', () => this.resetInactivityTimer());
+    window.addEventListener('click', () => this.resetInactivityTimer());
   }
 
+  private resetInactivityTimer() {
+    const currentTime = new Date().getTime();
+    localStorage.setItem(this.LAST_ACTIVITY_KEY, currentTime.toString());
+
+    // Clear the existing timer
+    if (this.inactivityTimer) {
+      clearTimeout(this.inactivityTimer);
+    }
+
+    // Set a new timer
+    this.inactivityTimer = setTimeout(() => {
+      this.logout();
+    }, this.INACTIVITY_TIME);
+  }
+
+  private checkInactivity() {
+    const lastActivityTime = localStorage.getItem(this.LAST_ACTIVITY_KEY);
+    if (lastActivityTime) {
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - parseInt(lastActivityTime, 10);
+
+      if (elapsedTime >= this.INACTIVITY_TIME) {
+        this.logout();
+      }
+    }
+  }
 }
