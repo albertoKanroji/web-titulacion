@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { VideosAllComponent } from './videos-all/videos-all.component';
 import { VideosSelectComponent } from './videos-select/videos-select.component';
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { VideosSelectComponent } from './videos-select/videos-select.component';
    UserProfileComponent,
    VideosAllComponent,
    VideosSelectComponent,
+   SeguimientoComponent,
 
   ],
   imports: [

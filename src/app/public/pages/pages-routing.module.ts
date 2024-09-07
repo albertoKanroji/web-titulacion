@@ -15,6 +15,7 @@ import {PreguntasRutinasTestComponent} from "./rutinas/preguntas-rutinas-test/pr
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import { VideosAllComponent } from './videos-all/videos-all.component';
 import { VideosSelectComponent } from './videos-select/videos-select.component';
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path: 'grupos-musculares',
     component:GruposMuscularesComponent
+  },
+  {
+    path: 'seguimiento',
+    component:SeguimientoComponent,
+    canActivate: [MisRutinasGuard]
   },
   {
     path: 'rutinas-publicas/:id',

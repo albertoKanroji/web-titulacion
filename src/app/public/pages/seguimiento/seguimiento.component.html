@@ -1,0 +1,71 @@
+<!-- Hero Start -->
+<div class="container-fluid bg-primary p-5 bg-hero mb-5">
+  <div class="row py-5">
+    <div class="col-12 text-center">
+      <h1 class="display-2 text-uppercase text-white mb-md-4">Seguimiento de Resultados</h1>
+      <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid p-5">
+  <div class="mb-5 text-center">
+    <h1 class="display-3 text-uppercase mb-0">Sube aquí las fotos de tu seguimiento mes con mes</h1>
+  </div>
+
+  <!-- Selección de fotos -->
+  <div class="row g-5 mb-5">
+    <div class="col-lg-12">
+      <div class="d-flex flex-column align-items-center bg-dark rounded text-center py-5 px-3">
+        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px">
+          <i class="fa fa-camera fs-4 text-white"></i>
+        </div>
+        <h5 class="text-uppercase text-primary">Sube tus fotos</h5>
+        <input type="file" (change)="onFilesSelected($event)" multiple accept="image/*" class="form-control mb-3" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Vista previa de imágenes y botón eliminar -->
+  <div class="row g-3">
+    <div class="col-lg-3" *ngFor="let img of previewImages; let i = index">
+      <div class="card">
+        <img [src]="img" class="card-img-top" alt="preview image" />
+        <div class="card-body text-center">
+          <button class="btn btn-danger" (click)="removeImage(i)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón de subida -->
+  <div class="row mt-4">
+    <div class="col text-center">
+      <button (click)="saveImagesAsBase64()" class="btn btn-primary">Subir fotos</button>
+    </div>
+  </div>
+
+<!-- Contenedor para imágenes cargadas anteriormente -->
+<div class="container-fluid p-5">
+  <div class="mb-5 text-center">
+    <h1 class="display-3 text-uppercase mb-0">Imágenes cargadas anteriormente</h1>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-3" *ngFor="let img of loadedImages">
+      <div class="card">
+        <!-- Asegúrate de usar el prefijo Base64 -->
+        <img [src]="img.image" class="card-img-top" alt="Imagen subida" />
+        <div class="card-body text-center">
+          <p>Fecha de carga: {{ img.created_at | date: 'short' }}</p> <!-- Si hay una fecha disponible -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
