@@ -18,11 +18,11 @@ public customer=localStorage.getItem('clienteId');
   updateCustomer(clienteId: number, customerData: any): Observable<any> {
     return this.http.put<any>(`${environment.apiUrl}/usuarios/update/${clienteId}`, customerData);
   }
-  uploadCustomerImages( images: string[]): Observable<any> {
+  uploadCustomerImages(images: { base64: string, peso: string, comentarios: string }[]): Observable<any> {
     const url = `${environment.apiUrl}/usuarios/store-images`; // Ruta del endpoint de Laravel
     const payload = {
       customer_id: this.customer,
-      images: images
+      images: images // Enviar el arreglo completo con base64, peso y comentarios
     };
 
     // Se puede agregar un header para que sea en formato JSON (opcional)
@@ -32,6 +32,7 @@ public customer=localStorage.getItem('clienteId');
 
     return this.http.post<any>(url, payload, { headers });
   }
+
   getImagenes(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/usuarios/store-images/${this.customer}/cliente`);
   }

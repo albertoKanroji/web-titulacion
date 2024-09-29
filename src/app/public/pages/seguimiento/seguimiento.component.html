@@ -52,13 +52,27 @@
     <h1 class="display-3 text-uppercase mb-0">Imágenes cargadas anteriormente</h1>
   </div>
 
-  <div class="row g-3">
-    <div class="col-lg-3" *ngFor="let img of loadedImages">
-      <div class="card">
-        <!-- Asegúrate de usar el prefijo Base64 -->
-        <img [src]="img.image" class="card-img-top" alt="Imagen subida" />
-        <div class="card-body text-center">
-          <p>Fecha de carga: {{ img.created_at | date: 'short' }}</p> <!-- Si hay una fecha disponible -->
+  <div class="timeline">
+    <div class="timeline-item" *ngFor="let img of loadedImages; let i = index">
+      <!-- Línea de tiempo en el centro -->
+      <div class="timeline-line"></div>
+
+      <!-- Imagen en la izquierda -->
+      <div class="timeline-content-left">
+        <img [src]="img.image" class="img-fluid" alt="Imagen subida" />
+      </div>
+
+      <!-- Información en la derecha -->
+      <div class="timeline-content-right">
+        <div class="card">
+          <div class="card-body">
+            <p><strong>Nombre:</strong> {{ user }}</p>
+            <p><strong>Peso Actual:</strong> {{ img.peso }}</p>
+            <p><strong>Comentarios:</strong> {{ img.comentarios }}</p>
+            <p><strong>Fecha de carga:</strong> {{ img.created_at | date: 'short' }}</p>
+            <p><strong>Mes:</strong> Mes {{ img.created_at.getMonth() + 1 }}</p>
+
+          </div>
         </div>
       </div>
     </div>
@@ -66,6 +80,37 @@
 </div>
 
 
+
+<!-- Modal para ingresar comentarios -->
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="commentModalLabel">Añadir Detalles de la Imagen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Imagen de vista previa en la modal -->
+        <img [src]="currentImagePreview" class="img-fluid mb-3" alt="Preview" />
+
+        <!-- Campo para ingresar el peso actual -->
+        <div class="mb-3">
+          <label for="pesoActual" class="form-label">Peso Actual</label>
+          <input type="number" [(ngModel)]="currentImageDetails.peso" class="form-control" id="pesoActual" />
+        </div>
+
+        <!-- Campo para ingresar comentarios -->
+        <div class="mb-3">
+          <label for="comentarios" class="form-label">Comentarios</label>
+          <textarea [(ngModel)]="currentImageDetails.comentarios" class="form-control" id="comentarios" rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="saveImageDetails()">Guardar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 
