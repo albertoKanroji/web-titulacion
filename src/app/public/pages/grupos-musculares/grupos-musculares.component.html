@@ -8,10 +8,11 @@
       <div class="blog-item">
         <div class="position-relative overflow-hidden rounded-top">
           <img
-            class="img-fluid"
-            [src]="'data:image/jpeg;base64,' + rutina.imagen"
-            alt=""
-          />
+          class="img-fluid"
+          [src]="getImageSrc(rutina.imagen)"
+          alt=""
+        />
+        
         </div>
         <div class="bg-dark d-flex align-items-center rounded-bottom p-3">
           <div
@@ -25,7 +26,7 @@
           </div>
           <a
             class="h5 text-uppercase text-light"
-            [href]="'/pages/rutinas-publicas/' + rutina.id"
+           
             >{{ rutina.nombre }}</a
           >
           <a

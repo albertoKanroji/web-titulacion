@@ -29,13 +29,16 @@
         *ngIf="!loading1; else loader1"
       >
         <img
-          class="img-fluid w-50 rounded me-4 align-self-start"
-          [src]="rutina.imagen"
+          width="500"
+          style="border-radius: 15px"
+          class="img-fluid"
+          [src]="getImageSrc(rutina.imagen)"
           alt=""
         />
-        <div>
+
+        <div style="margin-left: 15px;">
           <h1 class="text-uppercase mb-4">{{ rutina.nombre }}</h1>
-          <p style="font-size: 20px;">{{ rutina.descripcion }}</p>
+          <p style="font-size: 20px">{{ rutina.descripcion }}</p>
         </div>
       </div>
 
@@ -49,7 +52,7 @@
               <div class="position-relative overflow-hidden rounded-top">
                 <img
                   class="img-fluid"
-                  [src]="'data:image/jpeg;base64,' + rutina.miniatura"
+                  [src]="getImageSrc(rutina.miniatura)"
                   alt=""
                 />
               </div>
@@ -118,7 +121,7 @@
       </div>
 
       <!-- Tags Start -->
-      <div class="mb-5">
+      <!-- <div class="mb-5">
         <h3 class="text-uppercase mb-4">Tags</h3>
         <div class="d-flex flex-wrap m-n1" *ngIf="!loading; else loader">
           <a *ngFor="let tag of tags" href="" class="btn btn-dark m-1">{{
@@ -133,7 +136,7 @@
             eq.nombre
           }}</a>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

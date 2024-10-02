@@ -27,7 +27,7 @@
       <div class="mb-5" *ngIf="!loading; else loader">
         <div>
           <h1 class="text-uppercase mb-4">{{ rutina.nombre }}</h1>
-          <p style="font-size: 30px;">{{ rutina.descripcion }}</p>
+          <p class="descripcion">{{ rutina.descripcion }}</p>
         </div>
         <div class="d-flex justify-content-center">
           <video class="w-75 mb-5 mt-5" controls>
@@ -36,7 +36,11 @@
           </video>
         </div>
       </div>
-
+      <div>
+        <h1 class="text-uppercase mb-4">Informacion de Lesiones</h1>
+      <p style="font-size: 28px;" class="lesion">{{ rutina.lesion  }}</p>
+      </div>
+      
       <!-- Blog Detail End -->
 
       <!-- Comment List Start -->
@@ -62,6 +66,10 @@
             </div>
           </div>
         </div>
+      </div>
+      <div>
+       
+        
       </div>
       <ng-template #loader2>
         <div class="text-center" style="margin-top: 5%">

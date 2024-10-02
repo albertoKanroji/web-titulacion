@@ -26,7 +26,16 @@ export class GruposMuscularesDetalleComponent implements OnInit {
    this.getTags()
    this.getEquipo()
   }
-
+  getImageSrc(imagen: string): string {
+    if (imagen.startsWith('https')) {
+      // Si la imagen comienza con "https", es una URL directa (Firebase)
+      return imagen;
+    } else {
+      // Si no comienza con "https", asumimos que es Base64
+      return 'data:image/jpeg;base64,' + imagen;
+    }
+  }
+  
   obtenerDetalleRutina(): void {
     this.loading1 = true;
     const id = Number(this.route.snapshot.paramMap.get('id'));

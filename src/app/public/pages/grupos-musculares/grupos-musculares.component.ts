@@ -16,7 +16,16 @@ export class GruposMuscularesComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerRutinas();
   }
-
+  getImageSrc(imagen: string): string {
+    if (imagen.startsWith('https')) {
+      // Si la imagen comienza con "https", es una URL directa (Firebase)
+      return imagen;
+    } else {
+      // Si no comienza con "https", asumimos que es Base64
+      return 'data:image/jpeg;base64,' + imagen;
+    }
+  }
+  
   obtenerRutinas(): void {
     this.loading = true; 
     this.rutinasService.obtenerGruposMusculares().subscribe(
