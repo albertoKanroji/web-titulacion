@@ -16,6 +16,7 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 import { VideosAllComponent } from './videos-all/videos-all.component';
 import { VideosSelectComponent } from './videos-select/videos-select.component';
 import { SeguimientoComponent } from './seguimiento/seguimiento.component';
+import { LesionesComponent } from './lesiones/lesiones.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,11 @@ const routes: Routes = [
   {
     path: 'videos-all',
     component:VideosAllComponent,
+
+  },
+  {
+    path: 'lesiones',
+    component:LesionesComponent,
 
   },
   {
