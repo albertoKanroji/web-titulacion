@@ -29,6 +29,16 @@ export class VideosAllComponent implements OnInit {
       );
     }
   }
+  getImageSrc(miniatura: string): string {
+    if (miniatura.startsWith('https')) {
+      // Si la miniatura comienza con "https", es una URL directa (Firebase)
+      return miniatura;
+    } else {
+      // Si no comienza con "https", asumimos que es Base64
+      return 'data:image/jpeg;base64,' + miniatura;
+    }
+  }
+
   ngOnInit(): void {
     this.getVideosAll()
   }

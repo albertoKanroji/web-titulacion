@@ -30,7 +30,10 @@
   </div>
   <div class="col-md-6">
     <label for="profileIsComplete" class="form-label">Estado del perfil:</label>
-    <input type="text" formControlName="profileIsComplete" class="form-control" id="profileIsComplete">
+    <select formControlName="profileIsComplete" class="form-control" id="profileIsComplete">
+      <option value="Aplicada">Aplicada</option>
+      <option value="Sin Aplicar">Sin Aplicar</option>
+    </select>
   </div>
   <div class="col-md-6">
     <label for="peso" class="form-label">Peso:</label>
