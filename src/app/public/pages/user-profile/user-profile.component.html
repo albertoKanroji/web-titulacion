@@ -1,59 +1,81 @@
-
-<ng-template #loader>
-  <div class="text-center" style="margin-top: 5%;">
-    <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
+<div class="container-fluid p-5">
+  <div class="row">
+    <!-- Columna de formulario a la izquierda -->
+    <div class="col-lg-6">
+      <form [formGroup]="myForm" (ngSubmit)="submitForm()" style="margin-left: 5%;margin-top: 3%; margin-right: 5%;" class="row g-3" *ngIf="!loading; ">
+        <div class="col-md-6">
+          <label for="nombre" class="form-label">Nombre:</label>
+          <input type="text" formControlName="nombre" class="form-control" id="nombre">
+        </div>
+        <div class="col-md-6">
+          <label for="apellido" class="form-label">Apellido:</label>
+          <input type="text" formControlName="apellido" class="form-control" id="apellido">
+        </div>
+        <div class="col-md-6">
+          <label for="apellido2" class="form-label">Segundo Apellido:</label>
+          <input type="text" formControlName="apellido2" class="form-control" id="apellido2">
+        </div>
+        <div class="col-md-6">
+          <label for="correo" class="form-label">Correo electrónico:</label>
+          <input type="email" formControlName="correo" class="form-control" id="correo">
+        </div>
+        <div class="col-md-6">
+          <label for="rutina" class="form-label">Rutina:</label>
+          <input type="text" formControlName="rutina" class="form-control" id="rutina">
+        </div>
+        <div class="col-md-6">
+          <label for="profileIsComplete" class="form-label">Estado del perfil:</label>
+          <select formControlName="profileIsComplete" class="form-control" id="profileIsComplete">
+            <option value="Aplicada">Aplicada</option>
+            <option value="Sin Aplicar">Sin Aplicar</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="peso" class="form-label">Peso:</label>
+          <input type="number" formControlName="peso" class="form-control" id="peso">
+        </div>
+        <div class="col-md-6">
+          <label for="altura" class="form-label">Altura (en cm):</label>
+          <input type="number" formControlName="altura" class="form-control" id="altura">
+        </div>
+        <div class="col-md-6">
+          <label for="IMC" class="form-label">IMC:</label>
+          <input type="number" formControlName="IMC" class="form-control" id="IMC">
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-block" [disabled]="loadingBTN">
+            <span *ngIf="loadingBTN" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span *ngIf="!loadingBTN">Guardar Datos</span>
+          </button>
+        </div>
+      </form>
     </div>
-    <p class="mt-2">Cargando datos...</p>
-  </div>
-</ng-template>
-<form [formGroup]="myForm" (ngSubmit)="submitForm()" style="margin-left: 5%;margin-top: 3%; margin-right: 5%;" class="row g-3" *ngIf="!loading; else loader">
-  <div class="col-md-6">
-    <label for="nombre" class="form-label">Nombre:</label>
-    <input type="text" formControlName="nombre" class="form-control" id="nombre">
-  </div>
-  <div class="col-md-6">
-    <label for="apellido" class="form-label">Apellido:</label>
-    <input type="text" formControlName="apellido" class="form-control" id="apellido">
-  </div>
-  <div class="col-md-6">
-    <label for="apellido2" class="form-label">Segundo Apellido:</label>
-    <input type="text" formControlName="apellido2" class="form-control" id="apellido2">
-  </div>
-  <div class="col-md-6">
-    <label for="correo" class="form-label">Correo electrónico:</label>
-    <input type="email" formControlName="correo" class="form-control" id="correo">
-  </div>
-  <div class="col-md-6">
-    <label for="rutina" class="form-label">Rutina:</label>
-    <input type="text" formControlName="rutina" class="form-control" id="rutina">
-  </div>
-  <div class="col-md-6">
-    <label for="profileIsComplete" class="form-label">Estado del perfil:</label>
-    <select formControlName="profileIsComplete" class="form-control" id="profileIsComplete">
-      <option value="Aplicada">Aplicada</option>
-      <option value="Sin Aplicar">Sin Aplicar</option>
-    </select>
-  </div>
-  <div class="col-md-6">
-    <label for="peso" class="form-label">Peso:</label>
-    <input type="number" formControlName="peso" class="form-control" id="peso">
-  </div>
-  <div class="col-md-6">
-    <label for="altura" class="form-label">Altura (en cm):</label>
-    <input type="number" formControlName="altura" class="form-control" id="altura">
-  </div>
-  <div class="col-md-6">
-    <label for="IMC" class="form-label">IMC:</label>
-    <input type="number" formControlName="IMC" class="form-control" id="IMC">
-  </div>
-  <!-- Agrega los otros campos del formulario aquí -->
 
-  <div class="col-12">
-
-    <button type="submit" class="btn btn-primary btn-block" [disabled]="loadingBTN">
-      <span *ngIf="loadingBTN" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-      <span *ngIf="!loadingBTN" (click)="submitForm()">Guardar Datos</span>
-    </button>
+    <!-- Columna de tarjeta a la derecha -->
+    <div class="col-lg-6 d-flex justify-content-center align-items-center">
+      <div class="card-container" (click)="toggleCard()">
+        <div class="card-flip" [class.flipped]="isFlipped">
+          <!-- Lado frontal de la tarjeta -->
+          <div class="card-front" >
+            <img style="
+            position: absolute;
+            width: 150%;"src="https://firebasestorage.googleapis.com/v0/b/infinitytech-15a41.appspot.com/o/usuario%2FWhatsApp%20Image%202024-10-26%20at%2021.33.00_a97b265b.jpg?alt=media&token=abfedee4-609e-40da-b2cb-1f0851603f3e" alt="Tarjeta de Cliente" />
+          </div>
+          <!-- Lado posterior de la tarjeta con los datos -->
+          <div class="card-back">
+            <img style="
+            position: absolute;
+            width: 150%;"src="https://firebasestorage.googleapis.com/v0/b/infinitytech-15a41.appspot.com/o/usuario%2FWhatsApp%20Image%202024-10-26%20at%2021.33.00_903cb13e.jpg?alt=media&token=d374b2fb-0708-4700-ad1e-3a4cb210c069" alt="Datos del Cliente"  />
+            <div class="card-info">
+              <h4>{{ myForm.get('nombre')?.value }} {{ myForm.get('apellido')?.value }}</h4>
+              <p>{{ myForm.get('correo')?.value }}</p>
+              <p>Peso: {{ myForm.get('peso')?.value }} kg</p>
+              <p>Altura: {{ myForm.get('altura')?.value }} cm</p>
+              <p>IMC: {{ myForm.get('IMC')?.value }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</form>
+</div>

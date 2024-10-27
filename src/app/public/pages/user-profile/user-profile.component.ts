@@ -17,7 +17,10 @@ export class UserProfileComponent implements OnInit {
   loadingBTN = false;
   // Declara una variable para almacenar la respuesta del servicio
   solicitud: any;
-
+  isFlipped = false;
+  toggleCard() {
+    this.isFlipped = !this.isFlipped;
+  }
   constructor(
     private loginService: LoginService,
     private fb: FormBuilder,
