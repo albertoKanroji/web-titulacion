@@ -31,6 +31,11 @@
         [(ngModel)]="searchText"
         (input)="filterVideos()"
       />
+         <!-- Menú desplegable de grupos musculares -->
+         <select class="form-select" [(ngModel)]="selectedGroup" (change)="filterVideos()">
+          <option value="">Todos los grupos musculares</option>
+          <option *ngFor="let grupo of GM" [value]="grupo.id">{{ grupo.nombre }}</option>
+        </select>
       <button class="btn btn-primary px-4">
         <i class="bi bi-search"></i>
       </button>

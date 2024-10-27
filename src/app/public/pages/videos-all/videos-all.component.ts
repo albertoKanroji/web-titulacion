@@ -12,7 +12,9 @@ export class VideosAllComponent implements OnInit {
   loading2 = false;
   loadingContenido= false;
   rutina!: any;
+  selectedGroup: string = '';
   ejercicios: any[] = []; // Array para almacenar los ejercicios
+  GM: any[] = [];
   rutinas: any[]  = [];
   tags: any[]  = [];
   equipo: any[]  = [];
@@ -21,13 +23,12 @@ export class VideosAllComponent implements OnInit {
   searchText: string = '';
   constructor(private route: ActivatedRoute, private rutinasService: GruposMuscularesService) { }
   filterVideos(): void {
-    if (this.searchText.trim() === '') {
-      this.filteredVideos = this.ejercicios;
-    } else {
-      this.filteredVideos = this.ejercicios.filter((rutina) =>
-        rutina.nombre.toLowerCase().includes(this.searchText.toLowerCase())
-      );
-    }
+    // Filtrar los videos por nombre y grupo muscular
+    this.filteredVideos = this.ejercicios.filter((rutina) => {
+      const matchesName = rutina.nombre.toLowerCase().includes(this.searchText.toLowerCase());
+      const matchesGroup = this.selectedGroup ? rutina.gm_id === parseInt(this.selectedGroup) : true;
+      return matchesName && matchesGroup;
+    });
   }
   getImageSrc(miniatura: string): string {
     if (miniatura.startsWith('https')) {
@@ -41,13 +42,29 @@ export class VideosAllComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVideosAll()
+    this.getGruposMuscularesAll();
   }
   getVideosAll(): void {
     this.loader2 = true;
     this.rutinasService.getAllVideos().subscribe(
       (data: any) => {
-        this.ejercicios = data.data; // Asegúrate de que data sea un array de rutinas
+        this.ejercicios = data.data;
+        console.log(this.ejercicios);
         this.filteredVideos = this.ejercicios;
+        this.loader2 = false;
+      },
+      (error) => {
+        console.error('Error al obtener las rutinas:', error);
+        this.loader2 = false;
+      }
+    );
+  }
+  getGruposMuscularesAll(): void {
+    this.loader2 = true;
+    this.rutinasService.obtenerGruposMusculares().subscribe(
+      (data: any) => {
+        this.GM = data.data;
+        console.log(this.GM);
         this.loader2 = false;
       },
       (error) => {

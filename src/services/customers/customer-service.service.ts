@@ -36,4 +36,7 @@ public customer=localStorage.getItem('clienteId');
   getImagenes(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/usuarios/store-images/${this.customer}/cliente`);
   }
+  deleteImage(imageId: number): Observable<any> {
+    return this.http.delete<any>(`${environment.apiUrl}/usuarios/borrar/${this.customer}/imagenes/${imageId}`);
+  }
 }

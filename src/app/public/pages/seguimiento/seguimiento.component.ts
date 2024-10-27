@@ -7,7 +7,7 @@ declare var bootstrap: any; // Para manejar el modal de Bootstrap
 @Component({
   selector: 'app-seguimiento',
   templateUrl: './seguimiento.component.html',
-  styleUrls: ['./seguimiento.component.css']
+  styleUrls: ['./seguimiento.component.css'],
 })
 export class SeguimientoComponent implements OnInit, OnDestroy {
   previewImages: string[] = [];
@@ -15,19 +15,36 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
   selectedFiles: File[] = [];
   loadedImages: any[] = [];
   uploadedImagesDetails: any[] = []; // Almacena detalles como peso y comentarios
-  user=localStorage.getItem('clienteNombre');
+  user = localStorage.getItem('clienteNombre');
   // Variables para la modal
   currentImagePreview: string = '';
   currentImageDetails: any = { peso: '', comentarios: '' };
   currentFileIndex: number = 0;
-
+  nextUploadDate: Date | null = null;
   private commentModal: any; // Referencia a la modal de Bootstrap
+  canUpload: boolean = true;
+  constructor(
+    private customerService: CustomerService,
+    private toastr: ToastrService
+  ) {}
+  checkUploadAvailability(): void {
+    if (this.loadedImages.length > 0) {
+      const lastImageDate = new Date(
+        this.loadedImages[this.loadedImages.length - 1].created_at
+      );
+      this.nextUploadDate = new Date(lastImageDate);
+      this.nextUploadDate.setDate(lastImageDate.getDate() + 15);
 
-  constructor(private customerService: CustomerService, private toastr: ToastrService) {}
+      const today = new Date();
+      this.canUpload = today >= this.nextUploadDate;
+    } else {
+      this.canUpload = true;
+    }
+  }
 
   ngOnInit(): void {
     this.LOAD_IMAGES();
-
+    this.checkUploadAvailability();
     // Crear instancia de la modal al iniciar el componente
     const modalElement = document.getElementById('commentModal');
     this.commentModal = new bootstrap.Modal(modalElement, {
@@ -52,8 +69,9 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
             peso: img.peso, // Asignar el peso recibido
             comentarios: img.comentarios,
             id: img.id, // Asignar los comentarios recibidos
-            created_at: new Date(img.created_at) // Convertir la fecha a un objeto de tipo Date
+            created_at: new Date(img.created_at), // Convertir la fecha a un objeto de tipo Date
           }));
+          this.checkUploadAvailability();
           console.log('Imágenes cargadas:', this.loadedImages);
         }
       },
@@ -62,9 +80,25 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
       }
     );
   }
-
+  deleteImage(imageId: number): void {
+    this.customerService.deleteImage(imageId).subscribe({
+      next: (response) => {
+        // Filtrar la imagen eliminada de la lista
+        this.loadedImages = this.loadedImages.filter(
+          (img) => img.id !== imageId
+        );
+        this.showSuccess();
+        this.LOAD_IMAGES();
+      },
+      error: (err) => {
+        console.error('Error al eliminar la imagen', err);
+        this.showError();
+      },
+    });
+  }
 
   onFilesSelected(event: any) {
+    this.checkUploadAvailability();
     const files = event.target.files;
     this.previewImages = [];
     this.selectedFiles = [];
@@ -100,7 +134,7 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
     this.uploadedImagesDetails.push({
       preview: this.currentImagePreview,
       peso: this.currentImageDetails.peso,
-      comentarios: this.currentImageDetails.comentarios
+      comentarios: this.currentImageDetails.comentarios,
     });
 
     // Limpiar los detalles para la siguiente imagen
@@ -120,43 +154,42 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
 
   // Convierte las imágenes seleccionadas a Base64
   saveImagesAsBase64() {
-  this.base64Images = []; // Limpiar array base64
+    this.base64Images = []; // Limpiar array base64
 
-  const promises: Promise<void>[] = [];
+    const promises: Promise<void>[] = [];
 
-  this.selectedFiles.forEach((file, index) => {
-    const reader = new FileReader();
-    const promise = new Promise<void>((resolve) => {
-      reader.onload = (e: any) => {
-        // Agregar imagen en Base64 (sin el encabezado) al array
-        this.base64Images.push({
-          image: e.target.result.split(',')[1], // Imagen en Base64
-          peso: this.uploadedImagesDetails[index].peso, // Peso del detalle asociado
-          comentarios: this.uploadedImagesDetails[index].comentarios // Comentarios del detalle asociado
-        });
-        resolve();
-      };
+    this.selectedFiles.forEach((file, index) => {
+      const reader = new FileReader();
+      const promise = new Promise<void>((resolve) => {
+        reader.onload = (e: any) => {
+          // Agregar imagen en Base64 (sin el encabezado) al array
+          this.base64Images.push({
+            image: e.target.result.split(',')[1], // Imagen en Base64
+            peso: this.uploadedImagesDetails[index].peso, // Peso del detalle asociado
+            comentarios: this.uploadedImagesDetails[index].comentarios, // Comentarios del detalle asociado
+          });
+          resolve();
+        };
+      });
+      reader.readAsDataURL(file); // Convertir la imagen a base64
+      promises.push(promise);
     });
-    reader.readAsDataURL(file); // Convertir la imagen a base64
-    promises.push(promise);
-  });
 
-  // Esperamos que todas las imágenes se conviertan antes de hacer la llamada al servidor
-  Promise.all(promises).then(() => {
-    // Llamar al servicio para subir las imágenes
-    this.customerService.uploadCustomerImages(this.base64Images).subscribe(
-      (response) => {
-        this.showSuccess();
-        this.LOAD_IMAGES();
-        this.previewImages = [];
-      },
-      (error) => {
-        this.showError();
-      }
-    );
-  });
-}
-
+    // Esperamos que todas las imágenes se conviertan antes de hacer la llamada al servidor
+    Promise.all(promises).then(() => {
+      // Llamar al servicio para subir las imágenes
+      this.customerService.uploadCustomerImages(this.base64Images).subscribe(
+        (response) => {
+          this.showSuccess();
+          this.LOAD_IMAGES();
+          this.previewImages = [];
+        },
+        (error) => {
+          this.showError();
+        }
+      );
+    });
+  }
 
   // Mostrar mensaje de éxito
   showSuccess() {
