@@ -24,11 +24,16 @@
           <input type="text" formControlName="rutina" class="form-control" id="rutina">
         </div>
         <div class="col-md-6">
-          <label for="profileIsComplete" class="form-label">Estado del perfil:</label>
-          <select formControlName="profileIsComplete" class="form-control" id="profileIsComplete">
-            <option value="Aplicada">Aplicada</option>
-            <option value="Sin Aplicar">Sin Aplicar</option>
-          </select>
+          <label for="sexo" class="form-label">Sexo:</label>
+          <input type="text" formControlName="sexo" class="form-control" id="sexo">
+        </div>
+        <div class="col-md-6">
+          <label for="fecha_embresia" class="form-label">Membresia:</label>
+          <input type="text" formControlName="fecha_embresia" class="form-control" id="fecha_embresia">
+        </div>
+        <div class="col-md-6">
+          <label for="fecha_embresia_pago" class="form-label">Membresia (Fecha de pago):</label>
+          <input type="text" formControlName="fecha_embresia_pago" class="form-control" id="fecha_embresia_pago">
         </div>
         <div class="col-md-6">
           <label for="peso" class="form-label">Peso:</label>
@@ -65,14 +70,19 @@
           <div class="card-back">
             <img style="
             position: absolute;
-            width: 150%;"src="https://firebasestorage.googleapis.com/v0/b/infinitytech-15a41.appspot.com/o/usuario%2FWhatsApp%20Image%202024-10-26%20at%2021.33.00_903cb13e.jpg?alt=media&token=d374b2fb-0708-4700-ad1e-3a4cb210c069" alt="Datos del Cliente"  />
-            <div class="card-info">
-              <h4>{{ myForm.get('nombre')?.value }} {{ myForm.get('apellido')?.value }}</h4>
-              <p>{{ myForm.get('correo')?.value }}</p>
-              <p>Peso: {{ myForm.get('peso')?.value }} kg</p>
-              <p>Altura: {{ myForm.get('altura')?.value }} cm</p>
-              <p>IMC: {{ myForm.get('IMC')?.value }}</p>
+            width: 150%;"src="https://firebasestorage.googleapis.com/v0/b/infinitytech-15a41.appspot.com/o/usuario%2FWhatsApp%20Image%202024-10-27%20at%2018.58.01_6a9a8b9e.jpg?alt=media&token=c6adbe6b-5e32-45c6-85fe-4f4c0f622748" alt="Datos del Cliente"  />
+          <div class="card-info">
+            <div class="info-left">
+              <p><strong>Nombre Completo:</strong> {{ myForm.get('nombre')?.value }} {{ myForm.get('apellido')?.value }}</p>
+              <p><strong>Correo Electrónico:</strong> {{ myForm.get('correo')?.value }}</p>
             </div>
+            <div class="info-right">
+              <p><strong>Altura:</strong> {{ myForm.get('altura')?.value }} cm</p>
+              <p><strong>Peso:</strong> {{ myForm.get('peso')?.value }} kg</p>
+              <p><strong>IMC:</strong> {{ myForm.get('IMC')?.value }}</p>
+            </div>
+          </div>
+
           </div>
         </div>
       </div>

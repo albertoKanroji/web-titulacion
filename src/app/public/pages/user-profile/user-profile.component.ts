@@ -29,15 +29,18 @@ export class UserProfileComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.myForm  = this.fb.group({
-      nombre: [''],
-      apellido: [''],
-      apellido2: [''],
-      correo: [''],
-      peso: [null],
-      altura: [null],
+      nombre: [{ value: '', disabled: true }],
+      apellido: [{ value: '', disabled: true }],
+      apellido2: [{ value: '', disabled: true }],
+      correo: [{ value: '', disabled: true }],
+      peso: [{ value: '', disabled: true }],
+      altura: [{ value: '', disabled: true }],
       IMC: [{ value: null, disabled: true }],
-      rutina: [''],
-      profileIsComplete: ['']
+      rutina: [{ value: '', disabled: true }],
+      sexo: [{ value: '', disabled: true }],
+      fecha_embresia: [{ value: '', disabled: true }],
+      fecha_embresia_pago: [{ value: '', disabled: true }],
+      // profileIsComplete: [{ value: '', disabled: true }]
     });
   }
 getData(){
@@ -61,6 +64,13 @@ getData(){
   }
 }
   ngOnInit(): void {
+    const fechaMembresia = new Date(); // Cambia esto si necesitas una fecha específica
+    this.myForm.controls['fecha_embresia'].setValue(fechaMembresia.toISOString().slice(0, 10)); // Formato 'YYYY-MM-DD'
+
+    // Sumar 30 días a 'fechaMembresia' para 'fecha_embresia_pago'
+    const fechaPago = new Date(fechaMembresia);
+    fechaPago.setDate(fechaPago.getDate() + 30);
+    this.myForm.controls['fecha_embresia_pago'].setValue(fechaPago.toISOString().slice(0, 10));
 this.getData()
   }
 
