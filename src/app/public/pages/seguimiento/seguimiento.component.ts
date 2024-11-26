@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { CustomerService } from 'src/services/customers/customer-service.service';
+import { LogService } from 'src/services/logs/log-service.service';
 
 declare var bootstrap: any; // Para manejar el modal de Bootstrap
 
@@ -25,8 +26,19 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
   canUpload: boolean = true;
   constructor(
     private customerService: CustomerService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private logService: LogService
   ) {}
+  enviarLog(accion: string, contenido: string) {
+    this.logService.setLog(accion, contenido).subscribe({
+      next: () => {
+        console.log('Log registrado exitosamente.');
+      },
+      error: (logError) => {
+        console.error('Error al registrar el log:', logError);
+      },
+    });
+  }
   checkUploadAvailability(): void {
     if (this.loadedImages.length > 0) {
       const lastImageDate = new Date(
@@ -87,7 +99,8 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
         this.loadedImages = this.loadedImages.filter(
           (img) => img.id !== imageId
         );
-        this.showSuccess();
+        this.enviarLog('Se borro imagen', 'se borro la imagen $imageId'),
+          this.showSuccess();
         this.LOAD_IMAGES();
       },
       error: (err) => {
@@ -151,7 +164,15 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
       this.commentModal.hide();
     }
   }
-
+  getImageSrc(miniatura: string): string {
+    if (miniatura.startsWith('https')) {
+      // Si la miniatura comienza con "https", es una URL directa (Firebase)
+      return miniatura;
+    } else {
+      // Si no comienza con "https", asumimos que es Base64
+      return  miniatura;
+    }
+  }
   // Convierte las imágenes seleccionadas a Base64
   saveImagesAsBase64() {
     this.base64Images = []; // Limpiar array base64
@@ -180,6 +201,7 @@ export class SeguimientoComponent implements OnInit, OnDestroy {
       // Llamar al servicio para subir las imágenes
       this.customerService.uploadCustomerImages(this.base64Images).subscribe(
         (response) => {
+          this.enviarLog('Subio imagen', 'Subio imagen de seguimiento'),
           this.showSuccess();
           this.LOAD_IMAGES();
           this.previewImages = [];

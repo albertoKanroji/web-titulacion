@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {AuthService} from "../../../../../services/auth-service/auth-service.service";
 import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LogService } from 'src/services/logs/log-service.service';
 
 @Component({
   selector: 'app-preguntas-rutinas-test',
@@ -20,9 +21,23 @@ export class PreguntasRutinasTestComponent implements OnInit {
     private preguntaService: PreguntaService,
     private router: Router,
     private authService: AuthService
-    ,private toastr: ToastrService
+    ,private toastr: ToastrService,
+    private logService: LogService
     ) { }
+    enviarLog(){
+      const accion = 'Resultados enviados';
+      const contenido = `El usuario ${this.userId} envió los resultados del test correctamente.`;
 
+      this.logService.setLog(accion, contenido).subscribe({
+        next: () => {
+          console.log('Log registrado exitosamente.');
+        },
+        error: (logError) => {
+          console.error('Error al registrar el log:', logError);
+        }
+      });
+
+    }
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
     console.log(this.userId)
@@ -56,6 +71,8 @@ export class PreguntasRutinasTestComponent implements OnInit {
       (response) => {
         this.loadingBtn = false;
         console.log('Resultados enviados exitosamente', response);
+        this.enviarLog();
+
         this.router.navigate(['/pages/rutinas-users']); // Redirigir a la página de la rutina
       },
       (error: HttpErrorResponse) => {
@@ -67,5 +84,6 @@ export class PreguntasRutinasTestComponent implements OnInit {
       }
     );
   }
+
 
 }
