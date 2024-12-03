@@ -6,4 +6,7 @@ export interface Rutina {
     updated_at: string;
     created_at: string;
     tipo:string;
+    nivel: string;
+    repeticiones:string;
+    estado:string;
   }

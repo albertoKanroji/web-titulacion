@@ -66,8 +66,11 @@ export class PreguntasRutinasTestComponent implements OnInit {
       respuestaValor: this.respuestas[index]
     }));
     console.log(resultados);
-
-    this.preguntaService.enviarResultados(resultados, this.userId).subscribe(
+    let puntajeTotal = 0;
+    this.respuestas.forEach((respuesta) => {
+      puntajeTotal += respuesta ? +respuesta : 0; // Sumar las respuestas, asegurando que sean números
+    });
+    this.preguntaService.enviarResultados(resultados, this.userId,puntajeTotal ).subscribe(
       (response) => {
         this.loadingBtn = false;
         console.log('Resultados enviados exitosamente', response);

@@ -13,10 +13,11 @@ export class PreguntaService {
     return this.http.get<any>(`${environment.apiUrl}/questions/questions`);
   }
 
-  enviarResultados(resultados: any[], userId: number | null | undefined): Observable<any> {
+  enviarResultados(resultados: any[], userId: number | null | undefined,puntajeTotal: number): Observable<any> {
     const payload = {
       userId: userId,
-      respuestas: resultados
+      respuestas: resultados,
+      puntaje:puntajeTotal
     };
     return this.http.post<any>(`${environment.apiUrl}/questions/guardar-respuestas`, payload);
   }
