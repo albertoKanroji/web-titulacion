@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://infinity-gym-0cb043293aa2.herokuapp.com",
+      "target": "https://infinity-gym-backend-app-0d84c543cb2b.herokuapp.com",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {
@@ -8,4 +8,3 @@
       }
     }
   }
-  
