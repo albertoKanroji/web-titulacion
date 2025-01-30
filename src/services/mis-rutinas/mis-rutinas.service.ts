@@ -14,7 +14,7 @@ export class MisRutinasService {
   constructor(private http: HttpClient) { }
 
   obtenerRutinas(): Observable<Rutina[]> {
-    return this.http.get<Rutina[]>(`${environment.apiUrl}/rutinas/`);
+    return this.http.get<Rutina[]>(`${environment.apiUrl}/rutinas`);
   }
 
   obtenerDetalleRutina(id: number): Observable<Rutina> {

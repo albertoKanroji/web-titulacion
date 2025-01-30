@@ -12,7 +12,7 @@ export class GruposMuscularesService {
   constructor(private http: HttpClient) { }
 
   obtenerGruposMusculares(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/grupos-musculares/`);
+    return this.http.get<any[]>(`${environment.apiUrl}/grupos-musculares`);
   }
   obtenerDetalleGruposMuscular(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/${id}`);
