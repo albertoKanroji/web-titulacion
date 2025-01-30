@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://infinity-gym-backend-app-0d84c543cb2b.herokuapp.com/api/v1/:path*"
+      "source": "/api/v1/:path*",
+      "destination": "https://tudominio.herokuapp.com/api/v1/:path*"
     }
   ]
 }
