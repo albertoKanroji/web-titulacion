@@ -21,7 +21,7 @@ export class GruposMuscularesService {
     return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/${id}/video`);
   }
   getAllVideos(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/videos/`);
+    return this.http.get<any>(`${environment.apiUrl}/videos`);
   }
   VideosGMDetalle(id: number): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/grupos-musculares/video/${id}`);
