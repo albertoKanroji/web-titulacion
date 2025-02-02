@@ -1,6 +1,5 @@
 {
     "/api": {
-      "target": "https://infinity-api-app-05bb275c7cec.herokuapp.com",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": {

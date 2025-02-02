@@ -32,28 +32,15 @@
 
         <div class="col-lg-5 px-5 text-end">
           <div class="d-inline-flex align-items-center py-2">
-            <a
-              *ngIf="isLoggedIn"
-              (click)="logout()"
-              class="btn btn-primary mx-2"
-              >Cerrar sesión</a
-            >
-            <a
-              *ngIf="!isLoggedIn"
-              [routerLink]="['/login']"
-              class="btn btn-primary mx-2"
-              >Iniciar sesión</a
-            >
+            <a *ngIf="isLoggedIn" (click)="logout()" class="btn btn-primary mx-2">Cerrar sesión</a>
+            <a *ngIf="!isLoggedIn" [routerLink]="['/login']" class="btn btn-primary mx-2">Iniciar sesión</a>
           </div>
         </div>
       </div>
-      <nav
-        class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0 px-lg-5"
-      >
+
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0 px-lg-5">
         <a href="index.html" class="navbar-brand d-block d-lg-none">
-          <h1 class="m-0 display-4 text-primary text-uppercase">
-            InfinityTech
-          </h1>
+          <h1 class="m-0 display-4 text-primary text-uppercase">InfinityTech</h1>
         </a>
         <button
           type="button"
@@ -63,116 +50,68 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div
-          class="collapse navbar-collapse justify-content-between"
-          id="navbarCollapse"
-        >
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto py-0">
-            <!-- <a routerLink="../" class="nav-item nav-link active">Home</a> -->
-            <!-- <a routerLink="/about" class="nav-item nav-link">About</a>
-            <a routerLink="/classes" class="nav-item nav-link">Classes</a> -->
-            <!-- <a routerLink="/trainer" class="nav-item nav-link">Trainers</a> -->
-            <!-- <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                >Pages</a
-              >
-              <div class="dropdown-menu rounded-0 m-0">
-                <a routerLink="/pages/blog-gird" class="dropdown-item"
-                  >Blog Grid</a
-                >
-                <a routerLink="/pages/blog-detail" class="dropdown-item"
-                  >Blog Detail</a
-                >
-                <a routerLink="/pages/testimontal" class="dropdown-item"
-                  >Testimonial</a
-                >
-              </div>
-            </div> -->
+            <a href="index.html" class="nav-item nav-link">Inicio</a>
+            <a routerLink="/pages/videos-all" class="nav-item nav-link">Ejercicios</a>
+            <a routerLink="/pages/grupos-musculares" class="nav-item nav-link">Grupos Musculares</a>
             <div class="nav-item dropdown">
-              <a href="index.html" class="nav-item nav-link">Inicio</a>
-            </div>
-
-
-              <a routerLink="/pages/videos-all" class="nav-item nav-link"
-              >Ejercicios</a
-            >
-
-
-            <div class="nav-item dropdown">
-              <a routerLink="/pages/grupos-musculares" class="nav-item nav-link"
-                >Grupos Musculares</a
-              >
-            </div>
-
-            <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-                >Informacion</a
-              >
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Informacion</a>
               <div class="dropdown-menu rounded-0 m-0">
                 <a routerLink="/pages/lesiones" class="dropdown-item">Lesiones</a>
                 <a class="dropdown-item">Guia de recuperacion</a>
               </div>
             </div>
             <div class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                Rutinas</a
-              >
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Rutinas</a>
               <div class="dropdown-menu rounded-0 m-0">
-                <a routerLink="/pages/rutinas-publicas" class="dropdown-item"
-                  >Para todos</a
-                >
-                <a routerLink="/pages/rutinas-users" class="dropdown-item"
-                  >Mis Rutinas</a
-                >
+                <a routerLink="/pages/rutinas-publicas" class="dropdown-item">Para todos</a>
+                <a routerLink="/pages/rutinas-users" class="dropdown-item">Mis Rutinas</a>
               </div>
             </div>
-
-            <a routerLink="/pages/seguimiento" class="nav-item nav-link"
-              >Seguimiento</a
-            >
+            <a routerLink="/pages/seguimiento" class="nav-item nav-link">Seguimiento</a>
             <a routerLink="/contact" class="nav-item nav-link">Contactanos</a>
           </div>
-          <!-- <div class="mt-1">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control p-3"
-                placeholder="Keyword"
-              />
-              <button class="btn btn-primary px-4">
-                <i class="bi bi-search"></i>
-              </button>
-            </div>
-          </div> -->
-          <div class="d-flex align-items-center">
-            <!-- Mostrar la imagen y el nombre del usuario solo si está logueado -->
-            <div
-              *ngIf="isLoggedIn"
-              class="user-info d-flex flex-column align-items-center mx-2 position-relative"
-            >
-              <a
-                *ngIf="userImage"
-                [routerLink]="['/pages/profile']"
-                class="position-relative"
-              >
-                <img
-                  [src]="userImage"
-                  alt="User Image"
-                  class="user-image rounded-circle"
-                />
-                <i
-                  *ngIf="profileStatusIcon"
-                  class="fas {{
-                    profileStatusIcon
-                  }} profile-status-icon position-absolute"
-                ></i>
-              </a>
-              <div class="user-name mt-2">{{ userName }}</div>
-            </div>
-            <!-- Botones de inicio/cierre de sesión -->
 
-            <!-- Otros elementos del encabezado ... -->
+          <!-- Botón de Notificaciones -->
+          <div class="d-flex align-items-center">
+            <div class="dropdown">
+              <button
+                class="btn btn-secondary position-relative"
+                type="button"
+                id="notificacionesDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa fa-bell"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  3 <!-- Número de notificaciones (simulado) -->
+                </span>
+              </button>
+
+              <!-- Lista de Notificaciones -->
+              <ul class="dropdown-menu dropdown-menu-end p-2" aria-labelledby="notificacionesDropdown" style="min-width: 250px;">
+                <li *ngFor="let notificacion of notificaciones" class="dropdown-item">
+                  <div class="d-flex align-items-center">
+                    <!-- Imagen del logo -->
+                    <img *ngIf="notificacion.logo" [src]="'data:image/png;base64,' + notificacion.logo" class="me-2" width="40" height="40" alt="Logo">
+                    <div>
+                      <!-- Título de la notificación -->
+                      <strong>{{ notificacion.nombre }}</strong>
+                      <small class="text-muted d-block">{{ formatFecha(notificacion.fecha_envio) }}</small>
+                      <p class="mb-0">{{ notificacion.descripcion }}</p>
+                    </div>
+                  </div>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li class="text-center">
+                  <a href="#" class="btn btn-link btn-sm">Ver todas</a>
+                </li>
+              </ul>
+
+            </div>
           </div>
+
         </div>
       </nav>
     </div>
