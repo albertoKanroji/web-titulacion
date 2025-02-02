@@ -84,8 +84,8 @@
                 aria-expanded="false"
               >
                 <i class="fa fa-bell"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  3 <!-- Número de notificaciones (simulado) -->
+                <span *ngIf="notificaciones.length > 0" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ notificaciones.length }} <!-- Número dinámico de notificaciones -->
                 </span>
               </button>
 
