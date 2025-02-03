@@ -13,6 +13,8 @@ import { LogService } from 'src/services/logs/log-service.service';
 })
 export class PreguntasRutinasTestComponent implements OnInit {
   preguntas: any[] = [];
+  preguntaActual: number = 0; // Índice de la pregunta actual
+
   respuestas: number[] = [];
   loading: boolean = false;
   loadingBtn: boolean = false;
@@ -24,6 +26,15 @@ export class PreguntasRutinasTestComponent implements OnInit {
     ,private toastr: ToastrService,
     private logService: LogService
     ) { }
+    actualizarProgreso(): void {
+      // Actualiza el progreso cada vez que el usuario responde una pregunta
+    }
+
+    calcularProgreso(): number {
+      const respondidas = this.respuestas.filter(respuesta => respuesta !== null).length;
+      const total = this.preguntas.length;
+      return total > 0 ? (respondidas / total) * 100 : 0;
+    }
     enviarLog(){
       const accion = 'Resultados enviados';
       const contenido = `El usuario ${this.userId} envió los resultados del test correctamente.`;
@@ -38,6 +49,19 @@ export class PreguntasRutinasTestComponent implements OnInit {
       });
 
     }
+    // Avanzar a la siguiente pregunta
+  siguientePregunta(): void {
+    if (this.preguntaActual < this.preguntas.length - 1) {
+      this.preguntaActual++;
+    }
+  }
+
+  // Retroceder a la pregunta anterior
+  preguntaAnterior(): void {
+    if (this.preguntaActual > 0) {
+      this.preguntaActual--;
+    }
+  }
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
     console.log(this.userId)
@@ -86,6 +110,9 @@ export class PreguntasRutinasTestComponent implements OnInit {
         }
       }
     );
+  }
+  responder(index: number, valor: number): void {
+    this.respuestas[index] = valor;
   }
 
 

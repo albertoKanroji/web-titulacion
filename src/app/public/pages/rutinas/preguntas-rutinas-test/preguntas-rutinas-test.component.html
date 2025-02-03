@@ -1,25 +1,52 @@
 <div class="container mt-5">
+  <!-- Barra de progreso -->
+  <div class="progress mb-3">
+    <div
+      class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+      role="progressbar"
+      [style.width.%]="calcularProgreso()"
+      [attr.aria-valuenow]="calcularProgreso()"
+      aria-valuemin="0"
+      aria-valuemax="100">
+      {{ calcularProgreso() }}%
+    </div>
+  </div>
+
+  <!-- Spinner de carga -->
   <div *ngIf="loading" class="text-center">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   </div>
+
+  <!-- Formulario -->
   <div *ngIf="!loading">
     <form (ngSubmit)="enviarResultados()">
-      <div *ngFor="let pregunta of preguntas; let i = index" class="mb-4">
-        <h3>{{ pregunta.pregunta }}</h3>
-        <select class="form-select" [(ngModel)]="respuestas[i]" name="respuesta{{ i }}">
-          <option *ngFor="let opcion of pregunta.respuestas_opciones" [value]="opcion.valor">
+      <div *ngIf="preguntas.length > 0" class="text-center">
+        <h3 class="mb-4">{{ preguntas[preguntaActual].pregunta }}</h3>
+        <select class="form-select mx-auto w-75" [(ngModel)]="respuestas[preguntaActual]" name="respuesta" (change)="actualizarProgreso()">
+          <option *ngFor="let opcion of preguntas[preguntaActual].respuestas_opciones" [value]="opcion.valor">
             {{ opcion.opcion }}
           </option>
         </select>
       </div>
 
 
-      <button type="submit" class="btn btn-primary btn-block" [disabled]="loadingBtn">
-        <span *ngIf="loadingBtn" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        <span *ngIf="!loadingBtn" (click)="enviarResultados()">Enviar Resultados y Obtener Rutina</span>
-      </button>
+      <!-- Botones de Navegación -->
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" class="btn btn-secondary" (click)="preguntaAnterior()" [disabled]="preguntaActual === 0">
+          ⏪ Atrás
+        </button>
+
+        <button *ngIf="preguntaActual < preguntas.length - 1" type="button" class="btn btn-primary" (click)="siguientePregunta()">
+          Siguiente ⏩
+        </button>
+
+        <button *ngIf="preguntaActual === preguntas.length - 1" type="submit" class="btn btn-success" [disabled]="loadingBtn">
+          <span *ngIf="loadingBtn" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span *ngIf="!loadingBtn">✅ Enviar Resultados</span>
+        </button>
+      </div>
     </form>
   </div>
 </div>
